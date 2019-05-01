@@ -1,0 +1,47 @@
+<view class="index-main">
+
+  <!-- banner -->
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
+    <block wx:for="{{bannerList}}" wx:for-index="idx" wx:for-item="item" wx:key="item">
+      <swiper-item>
+        <image src="{{item.banner_img}}" class="slide-image" id="{{item.url}}" bindtap="tapInfo" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+
+  <!-- search -->
+  <view class='searchMain'>
+    <view class='searchView'>
+    <!-- 地区选择 -->
+    <view bindtap='chooseArea'>{{areaShow}}</view>
+    <!-- 日期选择 -->
+    <view bindtap='startTime'>{{ showBeginTime }}</view>
+    <view bindtap='endTime'>{{ showEndTime }}</view>
+
+    <button>查找房源</button>
+
+
+    </view>
+
+    <!-- 地区选择 -->
+    <van-popup show="{{ showArea }}" position="bottom">
+      <van-area area-list="{{ areaList }}" bind:confirm="onConfirmArea" bind:cancel="onCancelArea" />
+    </van-popup>
+
+    <!-- 起始日期 -->
+    <van-popup show="{{ showStart }}" position="bottom">
+      <van-datetime-picker type="date" value="{{ currentDate }}" min-date="{{ minDate }}" bind:confirm="onConfirm" bind:cancel="onCancel" formatter="{{ formatter }}" />
+    </van-popup>
+
+    <!-- 结束日期 -->
+    <van-popup show="{{ showEnd }}" position="bottom">
+      <van-datetime-picker type="date" value="{{ currentDateEnd }}" min-date="{{ minDateEnd }}" bind:confirm="onConfirmEnd" bind:cancel="onCancelEnd" formatter="{{ formatter }}" />
+    </van-popup>
+
+    
+
+
+  </view>
+
+</view>

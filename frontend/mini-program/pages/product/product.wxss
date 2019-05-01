@@ -1,0 +1,75 @@
+.pro_main{
+  
+}
+.pro_main swiper {
+  width: 750rpx;
+  height: 500rpx;
+  /* margin-bottom: 20rpx; */
+}
+.slide-image {
+  width: 750rpx;
+  height: 500rpx;
+}
+.pro_main_info{
+  padding: 0 30rpx;
+}
+.pro_main_place{
+  font-size: 12px;
+  margin-top: 40rpx;
+}
+.pro_main_desc{
+  margin-top: 30rpx;
+  /* width: 500rpx; */
+}
+.text {
+  font-size: 16px;
+  line-height: 38rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.pro_main_config{
+  font-size: 14px;
+  margin-top:20rpx;
+  color:#666;
+}
+.pro_main_see{
+  padding: 20rpx;
+  border: 1px solid rgb(210, 233, 240);
+  border-radius: 3px;
+  background:rgb(243, 251, 252);
+  font-size: 14px;
+  margin-top:43rpx;
+  text-align: center;
+  color: #444;
+}
+.pro_main_see text{
+  font-size: 12px;
+  color: #666;
+}
+.pro_main_buy{
+  position:fixed;
+  bottom: 0;
+  width:100%;
+  height: 100rpx;
+  background: rgb(223, 156, 156);
+  color: #fff;
+  line-height: 100rpx;
+  text-align: center;
+}
+.pro_main_location{
+  margin-top: 55rpx;
+  margin-bottom: 160rpx;
+  font-size: 14px;
+  color: #666;
+}
+.pro_main_city{
+
+}
+.pro_main_des{
+  margin-top: 35rpx;
+  font-size:12px;
+}

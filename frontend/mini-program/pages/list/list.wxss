@@ -1,0 +1,34 @@
+.list{
+  padding: 0 50rpx;
+  margin-top: 40rpx;
+}
+.list_box{
+  /* width:100%; */
+  /* height: 700rpx; */
+  padding: 8rpx;
+  margin-bottom: 55rpx;
+  border-radius: 30rpx;
+  box-shadow: 0 0 40rpx  #ccc;
+}
+.imgTop{
+  border-top-left-radius: 30rpx;
+  border-top-right-radius: 30rpx;
+}
+.ist_box_desc{
+  margin: 25rpx 0 10rpx 20rpx;
+  font-size: 12px;
+}
+.text {
+font-size: 16px;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis; 
+margin-left: 20rpx;
+}
+.ist_box_money{
+  font-size: 16px;
+  margin-left: 20rpx;
+  color: #666;
+  margin-top: 20rpx;
+  margin-bottom: 30rpx;
+}

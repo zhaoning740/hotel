@@ -1,0 +1,19 @@
+.slide-image {
+  width: 750rpx;
+  height: 280rpx;
+}
+
+.index-main swiper {
+  height: 280rpx;
+  margin-bottom: 20rpx;
+}
+
+.searchMain{
+  padding: 0 80rpx;
+}
+.searchView{
+  width:100%;
+  height: 300rpx;
+  border: 1px solid #ccc;
+  border-radius: 3px; 
+}

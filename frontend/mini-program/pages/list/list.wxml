@@ -1,0 +1,10 @@
+<view class='list'>
+
+  <view class='list_box' wx:for='{{proList}}' wx:for-item='item' wx:key='{{item.id}}' bindtap='tapProInfo' id='{{item.id}}'>
+    <image class='imgTop' src='{{item.image}}' style='width:100%' mode='widthFix'></image>
+    <view class='ist_box_desc'>{{item.desc}}</view>
+    <view class='ist_box_dress text'>{{item.adress}}</view>
+    <view class='ist_box_money'>¥ {{money}} 每晚</view>
+  </view>
+
+</view>
