@@ -19,10 +19,12 @@ module.exports = {
     hot: true,
     port: 3000,
     contentBase: path.resolve(process.cwd(), 'dist'),
+    proxy: {}
   },
   resolve: {
     alias: {
-      vue$: 'vue/dist/vue.runtime.esm.js'
+      vue$: 'vue/dist/vue.runtime.esm.js',
+      '@': path.resolve(process.cwd(), 'src/util')
     },
     extensions: [
       '.js',

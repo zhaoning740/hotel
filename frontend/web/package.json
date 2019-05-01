@@ -42,8 +42,10 @@
     "@babel/core": "^7.4.4",
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
+    "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "iview": "^3.4.1",
+    "qs": "^6.7.0",
     "vue": "^2.6.10"
   }
 }
