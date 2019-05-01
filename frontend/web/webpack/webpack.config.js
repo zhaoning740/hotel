@@ -47,6 +47,12 @@ module.exports = {
                 preserveWhitespace: false
               },
             }
+          },
+          {
+              loader: 'iview-loader',
+              options: {
+                  prefix: false
+              }
           }
         ]
       },
@@ -65,7 +71,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(jpe?g|png|gif)$/i,
+        test: /\.(jpe?g|png|svg|gif)$/i,
         use: [
           {
             loader: 'url-loader',

@@ -8,7 +8,7 @@ module.exports = merge(webpackConfig, {
   module: {
     rules: [
       {
-        test: /\.(scss|sass)$/,
+        test: /\.(sc|sa|c)ss$/,
         use: [
           {
             loader: 'style-loader'
