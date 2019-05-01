@@ -5,21 +5,29 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CleanPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
   entry: {
     main: ["@babel/polyfill", path.resolve(__dirname, '../src/main.js')]
   },
   output: {
     path: path.resolve(process.cwd(), 'dist'),
     filename: 'js/[name].[hash:8].js',
+    chunkFilename: 'js/[name].[hash:8].js',
+    // 资源引用的路径
+    publicPath: '/'
   },
   devServer: {
-    // ...
+    hot: true,
+    port: 3000,
+    contentBase: path.resolve(process.cwd(), 'dist'),
   },
   resolve: {
     alias: {
-      // vue$: 'vue/dist/vue.runtime.esm.js'
+      vue$: 'vue/dist/vue.runtime.esm.js'
     },
+    extensions: [
+      '.js',
+      '.vue'
+    ]
   },
   module: {
     rules: [
@@ -55,26 +63,6 @@ module.exports = {
             loader: 'babel-loader'
           }
         ]
-      },
-      {
-        test: /\.(scss|sass)$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              implementation: require('dart-sass')
-            }
-          },
-          {
-            loader: 'postcss-loader'
-          }
-        ],
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
@@ -130,9 +118,14 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanPlugin({
-      // 不需要清空
-      cleanOnceBeforeBuildPatterns: ['**/*']
+    // new CleanPlugin({
+    //   // 不需要清空
+    //   cleanOnceBeforeBuildPatterns: ['**/*']
+    // }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        VUE_APP_BASE_URL: JSON.stringify('http://localhost:3000')
+      }
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html')
