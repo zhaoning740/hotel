@@ -19,7 +19,14 @@ module.exports = {
     hot: true,
     port: 3000,
     contentBase: path.resolve(process.cwd(), 'dist'),
-    proxy: {}
+    proxy: {
+      "/good": {
+        name:"API",  // 自己取名
+        target: "http://wkvtqa.natappfree.cc",
+        changeOrigin: true,
+        secure: false
+      },
+    }
   },
   resolve: {
     alias: {

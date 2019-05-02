@@ -7,6 +7,7 @@ import NotFound from './view/Common/NotFound';
 import User from './view/User';
 import Shop from './view/Shop';
 import ShopCreate from './view/Shop/Create';
+import ShopDetail from './view/Shop/Detail';
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,10 @@ const routes = [
   {
     path: '/shop/create',
     component: ShopCreate,
+  },
+  {
+    path: '/shop/detail',
+    component: ShopDetail,
   },
   {
     // 会匹配所有路径

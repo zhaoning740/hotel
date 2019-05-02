@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import R from '@/request';
+
 export default {
   name: "Test",
 
@@ -15,29 +17,19 @@ export default {
     return {
       columns: [
         {
-          title: "Name",
-          key: "name",
-          render: (h, params) => {
-            return h("div", [
-              h("Icon", {
-                props: {
-                  type: "person"
-                }
-              }),
-              h("strong", params.row.name)
-            ]);
-          }
+          title: '门店名称',
+          key: "username",
         },
         {
-          title: "Age",
-          key: "age"
+          title: "联系电话",
+          key: "phone"
         },
         {
-          title: "Address",
+          title: "地址",
           key: "address"
         },
         {
-          title: "Action",
+          title: "操作",
           key: "action",
           width: 150,
           align: "center",
@@ -55,11 +47,11 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.show(params.index);
+                      this.show(params.id);
                     }
                   }
                 },
-                "View"
+                "编辑"
               ),
               h(
                 "Button",
@@ -74,49 +66,37 @@ export default {
                     }
                   }
                 },
-                "Delete"
+                "删除"
               )
             ]);
           }
         }
       ],
-      data: [
-        {
-          name: "John Brown",
-          age: 18,
-          address: "New York No. 1 Lake Park"
-        },
-        {
-          name: "Jim Green",
-          age: 24,
-          address: "London No. 1 Lake Park"
-        },
-        {
-          name: "Joe Black",
-          age: 30,
-          address: "Sydney No. 1 Lake Park"
-        },
-        {
-          name: "Jon Snow",
-          age: 26,
-          address: "Ottawa No. 2 Lake Park"
-        }
-      ]
+      data: []
     };
   },
   computed: {},
   methods: {
+    fetchList() {
+      R.post('/good/shopList')
+      .then(res => {
+        if(res.data && Array.isArray(data)) {
+          this.data = res.data;
+        }
+      })
+    },
     show(index) {
       this.$Modal.info({
-        title: "User Info",
-        content: `Name：${this.data6[index].name}<br>Age：${
-          this.data6[index].age
-        }<br>Address：${this.data6[index].address}`
+        title: "门店详情",
+        content: `test`
       });
     },
     remove(index) {
-      this.data6.splice(index, 1);
-    }
+      this.data.splice(index, 1);
+    },
+  },
+  mounted() {
+    this.fetchList()
   }
 };
 </script>
