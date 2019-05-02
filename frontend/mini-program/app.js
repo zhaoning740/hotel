@@ -97,6 +97,6 @@ App({
   globalData: {
     token: null,
     session_key: null,
-    apiUrl: 'http://k7j9dn.natappfree.cc'
+    apiUrl: 'http://wkvtqa.natappfree.cc'
   }
 })

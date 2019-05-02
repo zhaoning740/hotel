@@ -1,0 +1,23 @@
+.success_main{padding: 10rpx; text-align: center;}
+.success-text{padding-top: 30rpx; color: #333;}
+.success-btn{display: flex;font-size: 28rpx; justify-content: center; padding-top: 180rpx;}
+.success-index{width: 260rpx; margin: 0 20rpx; border: 1px solid #666; border-radius: 8rpx; line-height: 58rpx;}
+.success-info{width: 260rpx; margin: 0 20rpx; border: 1px solid #2ad2c9; border-radius: 8rpx; line-height: 58rpx; background: #2ad2c9; color: #fff;}
+.tast_mask{position: fixed;display:flex; top: 0; left: 0; background: rgba(0,0,0,.8); justify-content: space-around; align-items: center; width: 100%; height: 100%; box-sizing: border-box; }
+.close {
+    color: #fff;
+    border-radius: 100%;
+    line-height: 30px;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    font-size: 18px;
+    padding: 1px;
+    border: 1px solid #fff;
+    display: inline-block;
+    margin-top: 10px;
+}
+.close::before {
+    content: "\00D7";
+    color: #fff;
+}

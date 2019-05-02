@@ -5,7 +5,8 @@
     "pages/product/product",
     "pages/list/list",
     "pages/customer/index",
-    "pages/orderInfo/orderInfo"
+    "pages/orderInfo/orderInfo",
+    "pages/success/success"
   ],
   "window": {
     "backgroundTextStyle": "light",

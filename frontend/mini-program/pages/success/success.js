@@ -1,45 +1,18 @@
-// pages/product/product.js
-const app = getApp()
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    indicatorDots: true,
-    autoplay: true,
-    interval: 4000,
-    duration: 1000,
-    circular: true,
-    bannerList: [
-      'http://static.heyjuice.cn/Public/Wap/images/jdkjia1.jpg',
-      'http://static.heyjuice.cn/Public/Wap/images/jdkjia2.jpg'
-    ]
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      id: options.id
-    })
-  },
-  // 支付
-  toPayBtn:function(){
-    wx.showModal({
-      title: '提示',
-      content: '确认支付',
-      success(res) {
-        if (res.confirm) {
-          wx.navigateTo({
-            url: '/pages/success/success'
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    })
+
   },
 
   /**
@@ -61,6 +34,18 @@ Page({
    */
   onHide: function () {
 
+  },
+  // 返回首页
+  backIndex(){
+    wx.switchTab({
+      url: '/pages/index/index'
+    })
+  },
+  //查看订单详情
+  goInfo() {
+    wx.navigateTo({
+      url: '/pages/orderInfo/orderInfo'
+    })
   },
 
   /**

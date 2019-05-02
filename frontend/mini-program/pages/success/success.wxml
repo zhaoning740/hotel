@@ -1,0 +1,8 @@
+<view class="success_main">
+  <icon type="success" size="80" color='#2ad2c9' />
+  <view class='success-text'>订单支付成功</view>
+  <view class='success-btn'>
+    <view class='success-index' bindtap='backIndex'>回首页</view>
+    <view class='success-info' bindtap='goInfo'>查看订单详情</view>
+  </view>
+</view>
