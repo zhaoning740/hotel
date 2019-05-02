@@ -10,10 +10,81 @@
 
 .searchMain{
   padding: 0 80rpx;
+  margin-top: 30rpx;
 }
 .searchView{
   width:100%;
-  height: 300rpx;
-  border: 1px solid #ccc;
+  height: 360rpx;
   border-radius: 3px; 
+  box-shadow: 0 0 6px #ccc;
+}
+.chooseArea{
+  width: 90%;
+  height: 90rpx;
+  line-height: 90rpx;
+  margin-left: 5%;
+  color: #ccc;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+  padding-top: 15rpx;
+}
+.chooseTime{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: rgb(30, 214, 196);
+  margin-top: 48rpx;
+  font-size: 16px;
+}
+.searchBtn{
+  width: 80%;
+  color: #fff;
+  background: rgb(30, 214, 196);
+  margin-top: 40rpx;
+}
+.searchBtn::after{
+  border: 0;
+}
+.timedTitle{
+  font-size: 46rpx;
+  margin-bottom: 10rpx;
+}
+.timeddesc{
+  font-size: 28rpx;
+  color: #ccc;
+  margin-bottom: 30rpx;
+}
+.list{
+  padding: 0 50rpx;
+  margin-top: 60rpx;
+}
+.list_box{
+  /* width:100%; */
+  /* height: 700rpx; */
+  padding: 8rpx;
+  margin-bottom: 55rpx;
+  border-radius: 30rpx;
+  box-shadow: 0 0 40rpx  #ccc;
+}
+.imgTop{
+  border-top-left-radius: 30rpx;
+  border-top-right-radius: 30rpx;
+}
+.ist_box_desc{
+  margin: 25rpx 0 10rpx 20rpx;
+  font-size: 12px;
+}
+.text {
+font-size: 16px;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis; 
+margin-left: 20rpx;
+}
+.ist_box_money{
+  font-size: 16px;
+  margin-left: 20rpx;
+  color: #666;
+  margin-top: 20rpx;
+  margin-bottom: 30rpx;
 }

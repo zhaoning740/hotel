@@ -26,4 +26,15 @@
   <!-- 购买 -->
   <view class='pro_main_buy'>¥ 288 每晚 立即购买</view>
 
+  <!-- 弹窗 参与规则 -->
+<view class='mask_box3' wx:if="{{maskBox3}}">
+  <view class='mask_info3'>
+    <image src='{{rule_img}}' mode="widthFix"></image>
+    <button bindtap='yhq'>确认支付</button>
+  </view>
+  <view  class='mask_close' bindtap='gzBtnClose3'>
+    <image src='http://www.heyjuice.cn/Public/Wap/images/fxlj_02.png' style='width:72rpx; height:72rpx;'></image>
+  </view>
+</view>
+
 </view>

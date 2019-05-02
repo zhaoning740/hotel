@@ -1,30 +1,25 @@
-// pages/product/product.js
-const app = getApp()
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    indicatorDots: true,
-    autoplay: true,
-    interval: 4000,
-    duration: 1000,
-    circular: true,
-    bannerList: [
-      'http://static.heyjuice.cn/Public/Wap/images/jdkjia1.jpg',
-      'http://static.heyjuice.cn/Public/Wap/images/jdkjia2.jpg'
-    ],
-    maskBox3: true
+    orderList:{
+      code: 38798865778,
+      create_time: "2019-1-26",
+      receiver_name: "zhao白白",
+      receiver_phone: '13877766544',
+      status_name: '已使用',
+      real_money: '223'
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      id: options.id
-    })
+
   },
 
   /**

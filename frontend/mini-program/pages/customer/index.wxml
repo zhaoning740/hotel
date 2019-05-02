@@ -1,0 +1,26 @@
+<view class="customer-main">
+  <!-- 用户信息 -->
+  <view class='userInfo'>
+    <view class='userAvator'>
+      <image src='http://thirdwx.qlogo.cn/mmopen/vi_32/9tibC16F1UhPDyYajGFXRgcagwQv0s0lfqYpjgL2tWVUJMCx1eic3KTUyHWCStQ5V8gZjcibTgwicjliaOfhDs2r75w/132'></image>
+    </view>
+    <view class='userName'>zhao白白</view>
+  </view>
+
+  <!-- 订单 -->
+  <van-tabs active="{{ active }}" color='#1ed6c4' bind:change="onChange">
+    <van-tab title="全部订单">
+        <van-card custom-class='order' wx:for='{{orderList}}' wx:for-item='item' wx:key='item' centered='true' num="{{item.num}}" price="{{item.price}}" desc="{{item.desc}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}'
+        />
+    </van-tab>
+
+    <van-tab title="已使用">
+      <van-card custom-class='order' centered='true' wx:for='{{orderUsedList}}' wx:for-item='item' wx:key='item' num="{{item.num}}" price="{{item.price}}" desc="{{item.desc}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}' />
+    </van-tab>
+
+    <van-tab title="未使用">
+      <van-card custom-class='order' centered='true' wx:for='{{orderUnusedList}}' wx:for-item='item' wx:key='item' num="{{item.num}}" price="{{item.price}}" desc="{{item.desc}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}' />
+    </van-tab>
+  </van-tabs>
+
+</view>
