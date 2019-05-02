@@ -5,13 +5,15 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
+    /** swiper */
     indicatorDots: true,
     autoplay: true,
     interval: 4000,
     duration: 1000,
     circular: true,
-    showBeginTime: '起始日期',
-    showEndTime:'结束日期',
+    /** timeRange */
+    showBeginTime: '选择起始日期',
+    showEndTime:'选择结束日期',
     currentDate: new Date().getTime(),
     minDate: new Date().getTime(),
     currentDateEnd: new Date().getTime() + 24 * 60 * 60 * 1000,
@@ -24,6 +26,7 @@ Page({
       }
       return value;
     },
+    /** banner */
     bannerList: [{
         url: '/pages/product/index?id=557',
         banner_img: 'http://static.heyjuice.cn/Public/banner/20181227153119_qt_banner.jpg'
@@ -33,7 +36,9 @@ Page({
         banner_img: 'http://static.heyjuice.cn/Public/banner/20190212150726_qt_banner.jpg'
       }
     ],
-    areaShow:'选择地区',
+    /** 地区选择 */
+    areaShow:'选择目的地或城市',
+    /** Q: 能放到常量里？？ */
     areaList:{
       province_list: {
         110000: '北京市',
@@ -56,7 +61,23 @@ Page({
         120104: '南开区',
         120105: '河北区',
       }
-    }
+    },
+    proList: [
+      {
+        id: 1,
+        desc: '独立房间·1卧1床1卫',
+        adress: '安德里北街地铁+限女生+吃货天堂+独立公寓',
+        image: 'http://static.heyjuice.cn/Public/Wap/images/9_03.jpg',
+        money: 189
+      },
+      {
+        id: 2,
+        desc: '独立公寓·2卧2床1卫',
+        adress: '西局地铁口XX大厦北行560m',
+        image: 'http://static.heyjuice.cn/Public/Wap/images/2_520_21.jpg',
+        money: 268
+      }
+    ]
   },
   //事件处理函数
   bindViewTap: function() {

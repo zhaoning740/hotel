@@ -1,0 +1,33 @@
+.userInfo{
+  height: 300rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: .8;
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#1ed6c4),to(#22d8e0));
+  background-image: -webkit-linear-gradient(top,#1ed6c4,#22d8e0);
+  background-image: linear-gradient(-180deg,#1ed6c4,#22d8e0);
+}
+.userInfo .userAvator{
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border:1px solid #fff;
+}
+.userInfo .userAvator image{
+  width: 140rpx;
+  height: 140rpx;
+}
+.userInfo .userName{
+  color: #fff;
+  font-size: 32rpx;
+  margin-top: 20rpx;
+}
+.price-class{
+  color: #fff;
+}
+.order{
+  border-top: 8px solid #fff;
+}

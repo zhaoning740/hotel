@@ -1,9 +1,11 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/logs/logs",
     "pages/product/product",
-    "pages/list/list"
+    "pages/list/list",
+    "pages/customer/index",
+    "pages/orderInfo/orderInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -23,7 +25,7 @@
         "selectedIconPath": "images/find_hl.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/customer/index",
         "text": "我的",
         "iconPath": "images/me.png",
         "selectedIconPath": "images/me_hl.png"
