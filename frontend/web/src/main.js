@@ -1,13 +1,18 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 import iView from 'iview';
-import 'iview/dist/styles/iview.css';
 import R from '@/request';
+
+import App from './App.vue';
+import router from './router';
+import 'iview/dist/styles/iview.css';
+
+// R.post('/123', {h: 1})
 
 Vue.use(iView);
 
-R.post('/123', {h: 1})
-
 new Vue({
-  render: h => h(App)
-}).$mount('#app')
+  el: '#app',
+  router,
+  render: h => h(App),
+})
