@@ -1,15 +1,15 @@
 <template>
-  <Form :model="formItem" :label-width="80">
-    <FormItem label="门店名称">
+  <Form ref="formValidate" :model="formItem" :rules="ruleValidate" :label-width="80">
+    <FormItem label="门店名称" prop="name">
       <Input v-model="formItem.name" placeholder="请输入..."></Input>
     </FormItem>
-    <FormItem label="联系电话">
+    <FormItem label="联系电话" prop="phone">
       <Input v-model="formItem.phone" placeholder="请输入..."></Input>
     </FormItem>
-    <FormItem label="门店地址">
+    <FormItem label="门店地址" prop="address">
       <Input v-model="formItem.address" placeholder="请输入..."></Input>
     </FormItem>
-    <FormItem label="门店图片">
+    <FormItem label="门店图片" prop="picture">
       <div class="demo-upload-list" v-for="item in uploadList">
         <template v-if="item.status === 'finished'">
           <img :src="item.url">
@@ -34,7 +34,7 @@
         :before-upload="handleBeforeUpload"
         multiple
         type="drag"
-        action="//jsonplaceholder.typicode.com/posts/"
+        action="/user/uploadFile"
         style="display: inline-block;width:58px;"
       >
         <div style="width: 58px;height:58px;line-height: 58px;">
@@ -50,8 +50,8 @@
       </Modal>
     </FormItem>
     <FormItem>
-      <Button type="primary">提交</Button>
-      <Button style="margin-left: 8px">取消</Button>
+      <Button type="primary" @click="onSubmit('formValidate')">提交</Button>
+      <Button style="margin-left: 8px" @click="cancle()">取消</Button>
     </FormItem>
   </Form>
 </template>
@@ -62,7 +62,30 @@ export default {
       formItem: {
         name: "",
         phone: "",
-        address: "male"
+        address: ""
+      },
+      ruleValidate: {
+        name: [
+          {
+            required: true,
+            message: "请输入门店名称",
+            trigger: "blur"
+          }
+        ],
+        phone: [
+          {
+            required: true,
+            message: "请输入联系电话",
+            trigger: "blur"
+          }
+        ],
+        address: [
+          {
+            required: true,
+            message: "请输入门店地址",
+            trigger: "blur"
+          }
+        ]
       },
       defaultList: [
         {
@@ -82,6 +105,21 @@ export default {
     };
   },
   methods: {
+    onSubmit(name) {
+      console.log("onSubmit===>", this.formItem);
+      console.log('refs===>', this.$refs)
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          this.$Message.success("Success!");
+        } else {
+          this.$Message.error("Fail!");
+        }
+      });
+    },
+    cancle(){
+      console.log(this)
+      this.$router.back()
+    },
     handleView(name) {
       this.imgName = name;
       this.visible = true;
