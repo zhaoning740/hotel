@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo: {},
     orderList:[
       {
         id: 12,
@@ -90,7 +91,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    app.ready().then(() => {
+      if (app.globalData.userInfo) {
+        this.setData({
+          userInfo: app.globalData.userInfo,
+        })
+      }
+    })
   },
   // 跳转详情页
   toInfoUrl(e){

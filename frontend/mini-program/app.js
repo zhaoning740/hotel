@@ -2,16 +2,11 @@
 App({
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
+    const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    this.ready()
     // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -20,83 +15,74 @@ App({
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
+              console.log('getUserInfo===>', res.userInfo)
               this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
             }
           })
         }
       }
     })
   },
-  ready() {
-    var that = this
-    return new Promise(function (resolve, reject) {
-      var value = wx.getStorageSync('user')
-      var timestamp = Date.parse(new Date()) / 1000
-      if (value && timestamp < value.end_time) {
-        that.globalData.token = value.token
-        that.globalData.is_vip = wx.getStorageSync('is_vip')
-        resolve();
-      } else {
-        wx.login({
+  login() {
+    const that = this;
+    wx.login({
+      success: function (res) {
+        // 登录成功后拿code换客户信息
+        wx.request({
+          url: that.globalData.apiUrl + '/user/query',
+          data: { code: res.code },
+          method: 'get',
+          // header: { "Content-Type": "application/x-www-form-urlencoded" },
           success: function (res) {
-
-            wx.request({
-
-              url: that.globalData.apiUrl + '/user/query',
-              data: { code: res.code },
-              method: 'get',
-              header: { "Content-Type": "application/x-www-form-urlencoded" },
-              success: function (res) {
-
-                var data = res.data.data
-                var iToken = data.token
-                var isVip = res.data.is_vip
-
-
-                that.globalData.token = iToken
-                that.globalData.is_vip = isVip
-                wx.setStorage({
-                  key: "user",
-                  data: data
-                })
-
-                wx.setStorage({
-                  key: "is_vip",
-                  data: isVip
-                })
-
-                if (res.data.status == 2) {
-                  that.globalData.session_key = res.data.data.session_key
-                  wx.navigateTo({
-                    url: '/pages/login/login'
-                  })
-                }
-                if (res.data.status == 0) {
-                  that.globalData.session_key = res.data.data.session_key
-                  wx.navigateTo({
-                    url: '/pages/login/login'
-                  })
-                }
-
-
-                resolve();
-              }
-            })
-
+            console.log('/user/query==>', res)
+            const {
+              data
+            } = res;
+            if (data && data.success) {
+              // 调用成功
+              wx.setStorage({
+                key: "USER_INFO",
+                data: data.data
+              })
+            } else {
+              console.warn('登录失败', res.errMsg)
+            }
+          },
+          fail: () => {
+            console.warn('接口调用失败')
           }
         })
+
       }
+    })
+  },
+  ready() {
+    var that = this;
+    wx.getLocation({
+      success: function(res) {
+        console.log('getLocation', res)
+      },
+    });
+    return new Promise(function (resolve, reject) {
+      var value = wx.getStorageSync('USER_INFO')
+      wx.checkSession({
+        success(res) {
+          console.log('checkSuccess==>', res)
+          // session_key 未过期，并且在本生命周期一直有效
+          resolve(value)
+        },
+        fail() {
+          // session_key 已经失效，需要重新执行登录流程
+          this.login() // 重新登录
+          reject()
+        }
+      })
     })
   },
   globalData: {
     token: null,
     session_key: null,
+    userInfo: {},
     apiUrl: 'http://wkvtqa.natappfree.cc'
   }
 })

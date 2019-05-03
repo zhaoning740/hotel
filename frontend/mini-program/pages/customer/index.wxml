@@ -2,9 +2,9 @@
   <!-- 用户信息 -->
   <view class='userInfo'>
     <view class='userAvator'>
-      <image src='http://thirdwx.qlogo.cn/mmopen/vi_32/9tibC16F1UhPDyYajGFXRgcagwQv0s0lfqYpjgL2tWVUJMCx1eic3KTUyHWCStQ5V8gZjcibTgwicjliaOfhDs2r75w/132'></image>
+      <image src="{{userInfo.avatarUrl}}"></image>
     </view>
-    <view class='userName'>zhao白白</view>
+    <view class='userName'>{{userInfo.nickName}}</view>
   </view>
 
   <!-- 订单 -->

@@ -85,6 +85,16 @@ Page({
       url: '../logs/logs'
     })
   },
+  onSearch: () => {
+    const that = this;
+    wx.request({
+      url: app.globalData.apiUrl + '/good/shopList',
+      data: {},
+      success: (res) => {
+        console.log('onSearch==>', res)
+      }
+    })
+  },
   //选择起始时间
   startTime() {
     this.setData({
@@ -139,6 +149,14 @@ Page({
       area: event.detail.values,
       areaShow: event.detail.values[2].name,
       showArea: false
+    })
+  },
+  // 跳转详情页
+  tapProInfo(e) {
+    const id = e.currentTarget.id;
+    const url = '/pages/product/product?id=' + id;
+    wx.navigateTo({
+      url,
     })
   },
 

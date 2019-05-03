@@ -57,6 +57,7 @@
 .list{
   padding: 0 50rpx;
   margin-top: 60rpx;
+  padding-bottom:50rpx;
 }
 .list_box{
   /* width:100%; */

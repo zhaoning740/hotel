@@ -22,7 +22,7 @@
         <view bindtap='endTime'>{{ showEndTime }}</view>
       </view>
 
-      <button class='searchBtn'>查找房源</button>
+      <button class='searchBtn' bindtap='onSearch'>查找房源</button>
 
 
     </view>
