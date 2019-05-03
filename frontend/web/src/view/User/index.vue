@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="buttonContainer">
-      <Button type="primary" to="/shop/create">新增用户</Button>
+      <Button type="primary" to="/user/create">新增用户</Button>
     </div>
     <Table border :columns="columns" :data="data"></Table>
   </div>
