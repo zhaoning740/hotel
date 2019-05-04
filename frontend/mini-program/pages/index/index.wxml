@@ -43,7 +43,7 @@
     </van-popup>
   </view>
 
- <!-- 限时秒杀 -->
+  <!-- 限时秒杀 -->
   <view class='list'>
     <view class='timedBuy'>
       <view class='timedTitle'>春季特惠房源</view>
@@ -57,5 +57,12 @@
     </view>
   </view>
 
-
+  <van-popup show="{{ showModal }}">
+    <view class="showModalContainer">
+      <view class='showModalLogin'>登录并授权</view>
+      <view class='showModalContent'>申请获取一下权限</view>
+      <view class='showModalContent'>获得你的公开信息(昵称，头像等)</view>
+      <button class='showModalBtn' open-type='getUserInfo' bindgetuserinfo="onGotUserInfo">登录</button>
+    </view>
+  </van-popup>
 </view>

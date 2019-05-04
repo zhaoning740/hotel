@@ -5,6 +5,7 @@ const util = require('../../utils/util.js')
 
 Page({
   data: {
+    showModal: false,
     /** swiper */
     indicatorDots: true,
     autoplay: true,
@@ -159,11 +160,22 @@ Page({
       url,
     })
   },
+  // 允许授权
+  onGotUserInfo(e){
+    app.globalData.showLoginModal = false;
+    this.setData({
+      showModal: app.globalData.showLoginModal
+    })
+  },
 
   onLoad: function() {
 
   },
   onShow: function() {
+    // 授权
+    this.setData({
+      showModal: app.globalData.showLoginModal
+    })
     // app.ready().then(() => {
     //   this.callFun()
     // }).catch()

@@ -89,3 +89,21 @@ margin-left: 20rpx;
   margin-top: 20rpx;
   margin-bottom: 30rpx;
 }
+.showModalContainer{
+  width: 500rpx;
+  padding-top: 30rpx;
+  text-align: center;
+}
+.showModalLogin{
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+}
+.showModalContent{
+  font-size: 28rpx;
+  color: #ccc;
+}
+.showModalBtn{
+  margin-top: 30rpx;
+  font-size: 32rpx;
+  color: rgb(43, 175, 43);
+}

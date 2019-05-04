@@ -1,10 +1,15 @@
 <view class="customer-main">
   <!-- 用户信息 -->
   <view class='userInfo'>
+  
     <view class='userAvator'>
-      <image src="{{userInfo.avatarUrl}}"></image>
+      <open-data type="userAvatarUrl"></open-data>
+      <!-- <image src="{{userInfo.avatarUrl}}"></image> -->
     </view>
-    <view class='userName'>{{userInfo.nickName}}</view>
+    <view class='userName'>
+    <!-- {{userInfo.nickName}} -->
+    <open-data type="userNickName"></open-data>
+    </view>
   </view>
 
   <!-- 订单 -->
