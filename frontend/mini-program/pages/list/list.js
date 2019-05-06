@@ -11,14 +11,14 @@ Page({
         id: 1,
         desc: '独立房间·1卧1床1卫',
         adress: '安德里北街地铁+限女生+吃货天堂+独立公寓',
-        image: 'http://static.heyjuice.cn/Public/Wap/images/9_03.jpg',
+        image: '/images/1.jpg',
         money: 189
       },
       {
         id: 2,
         desc: '独立公寓·2卧2床1卫',
         adress: '西局地铁口XX大厦北行560m',
-        image: 'http://static.heyjuice.cn/Public/Wap/images/2_520_21.jpg',
+        image: '/images/6.jpeg',
         money: 268
       }
     ]

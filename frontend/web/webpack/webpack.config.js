@@ -22,7 +22,7 @@ module.exports = {
     proxy: {
       "/good": {
         name:"API",  // 自己取名
-        target: "http://wkvtqa.natappfree.cc",
+        target: "http://gphrtg.natappfree.cc",
         changeOrigin: true,
         secure: false
       },

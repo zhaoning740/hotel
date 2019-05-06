@@ -12,8 +12,8 @@ Page({
     duration: 1000,
     circular: true,
     bannerList: [
-      'http://static.heyjuice.cn/Public/Wap/images/jdkjia1.jpg',
-      'http://static.heyjuice.cn/Public/Wap/images/jdkjia2.jpg'
+      '/images/3.jpg',
+      '/images/4.jpg'
     ]
   },
 

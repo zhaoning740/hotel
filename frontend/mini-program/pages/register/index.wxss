@@ -1,1 +1,13 @@
 /* pages/register/index.wxss */
+.zhuce{
+  padding: 0 50rpx;
+}
+/* .zhucebtn{
+  margin-top: 40rpx;
+} */
+.btnContainer{
+  margin-top: 40rpx;
+}
+.radioContainer{
+  display: flex;
+}

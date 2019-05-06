@@ -13,6 +13,7 @@ Page({
     phone: '',
     age: '',
     sex: 0,
+    radio: '0'
   },
 
   /**

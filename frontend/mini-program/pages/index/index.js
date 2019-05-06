@@ -30,11 +30,11 @@ Page({
     /** banner */
     bannerList: [{
         url: '/pages/product/index?id=557',
-        banner_img: 'http://static.heyjuice.cn/Public/banner/20181227153119_qt_banner.jpg'
+        banner_img: '/images/3.jpg'
       },
       {
         url: '/pages/product/index?id=1',
-        banner_img: 'http://static.heyjuice.cn/Public/banner/20190212150726_qt_banner.jpg'
+        banner_img: '/images/4.jpg'
       }
     ],
     /** 地区选择 */
@@ -68,14 +68,14 @@ Page({
         id: 1,
         desc: '独立房间·1卧1床1卫',
         adress: '安德里北街地铁+限女生+吃货天堂+独立公寓',
-        image: 'http://static.heyjuice.cn/Public/Wap/images/9_03.jpg',
+        image: '/images/1.jpg',
         money: 189
       },
       {
         id: 2,
         desc: '独立公寓·2卧2床1卫',
         adress: '西局地铁口XX大厦北行560m',
-        image: 'http://static.heyjuice.cn/Public/Wap/images/2_520_21.jpg',
+        image: '/images/6.jpeg',
         money: 268
       }
     ]
