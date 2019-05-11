@@ -8,6 +8,9 @@ import User from './view/User';
 import Shop from './view/Shop';
 import ShopCreate from './view/Shop/Create';
 import ShopDetail from './view/Shop/Detail';
+import Order from './view/Order';
+import House from './view/House';
+import HouseMutate from './view/House/Mutate';
 
 Vue.use(VueRouter);
 
@@ -31,6 +34,18 @@ const routes = [
   {
     path: '/shop/detail',
     component: ShopDetail,
+  },
+  {
+    path: '/ordermanager',
+    component: Order,
+  },
+  {
+    path: '/housemanager',
+    component: House,
+  },
+  {
+    path: '/house/(create|detail)/',
+    component: HouseMutate,
   },
   {
     // 会匹配所有路径

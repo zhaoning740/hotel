@@ -10,6 +10,9 @@ Page({
       create_time: "2019-1-26",
       receiver_name: "zhao白白",
       receiver_phone: '13877766544',
+      start_time: '2019-3-4',
+      end_time: '2019-3-6',
+      receiver_address: '北京市朝阳区望京新城2号',
       status_name: '已使用',
       real_money: '223'
     }

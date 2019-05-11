@@ -9,14 +9,17 @@
   </swiper>
 
   <view class='pro_main_info'>
-    <view class='pro_main_place'>北京·独立公寓</view>
+    <view class='pro_main_place'>北京 · 独立公寓</view>
     <view class='pro_main_desc text'>楼下就是星巴克/双地铁/家庭影院/北欧风精致套房/吃货天堂/夜景超美</view>
     <view class='pro_main_config'>1卧室·1床·1卫生间·最多住2人</view>
-    <view class='pro_main_see'>这个房源很不错。
+    <!-- <view class='pro_main_see'>这个房源很不错。
       <text>过去一周的浏览量超过200次。</text>
+    </view> -->
+    <view class='pro_main_see'>地址:
+      <text>北京海淀区上地三街金隅嘉华大厦A座八号楼</text>
     </view>
     <view class='pro_main_location'>
-      <view class='pro_main_city'>北京，中国</view>
+      <!-- <view class='pro_main_city'>北京，中国</view> -->
       <view class='pro_main_des'>我的公寓位于北京南三环生活区，周围交通便利，购物休闲都非常方便。 -楼下就是星巴克/双地铁/家庭影院/北欧风精致套房/吃货天堂/夜景超美-楼下就是星巴克/双地铁/家庭影院/北欧风精致套房/吃货天堂/夜景超美-楼下就是星巴克/双地铁/家庭影院/北欧风精致套房/吃货天堂/夜景超美</view>
 
 

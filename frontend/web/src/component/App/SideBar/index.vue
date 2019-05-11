@@ -8,8 +8,13 @@
         <Icon type="md-document"/>用户管理
       </MenuItem>
       <MenuItem name="shop" to="/shop">
-        <Icon type="md-chatbubbles"/>
-        门店管理
+        <Icon type="md-chatbubbles"/>门店管理
+      </MenuItem>
+      <MenuItem name="ordermanager" to="/ordermanager">
+        <Icon type="md-document"/>订单管理
+      </MenuItem>
+      <MenuItem name="housemanager" to="/housemanager">
+        <Icon type="md-chatbubbles"/>房源管理
       </MenuItem>
     </MenuGroup>
     <!-- <MenuGroup title="统计分析">
