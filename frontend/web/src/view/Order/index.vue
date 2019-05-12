@@ -3,7 +3,7 @@
     <div class="buttonContainer">
       <!-- <Button type="primary" to="/user/create">新增用户</Button> -->
     </div>
-    <Table border :columns="columns" :data="data"></Table>
+    <Table :loading="loading" border :columns="columns" :data="data"></Table>
   </div>
 </template>
 
@@ -15,14 +15,15 @@ export default {
 
   data() {
     return {
+      loading: false,
       columns: [
         {
           title: '订单编号',
-          key: "ordernum",
+          key: "id",
         },
         {
-          title: "联系人",
-          key: "name"
+          title: "下单客户",
+          key: "account"
         },
         {
           title: "联系方式",
@@ -30,11 +31,15 @@ export default {
         },
         {
           title: "入住时间",
-          key: "starttime"
+          key: "checkintime"
         },
         {
           title: "结束时间",
-          key: "endtime"
+          key: "checkouttime"
+        },
+        {
+          title: "天数",
+          key: "day"
         },
         {
           title: "地址",
@@ -45,9 +50,13 @@ export default {
           key: "status"
         },
         {
-          title: "金额",
+          title: "支付金额(￥)",
           key: "money"
         },
+        {
+          title: '评价',
+          key: 'content',
+        }
       ],
       data: []
     };
@@ -55,11 +64,15 @@ export default {
   computed: {},
   methods: {
     fetchList() {
-      R.post('/user/userList')
+      this.loading = true;
+      R.post('/order/list', {})
       .then(res => {
-        if(res.data && Array.isArray(data)) {
+        if(res.data && Array.isArray(res.data)) {
           this.data = res.data;
         }
+      })
+      .finally(() => {
+        this.loading = false;
       })
     },
     show(index) {

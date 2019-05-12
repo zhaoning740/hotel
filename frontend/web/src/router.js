@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 /** View */
+import Login from './view/Login';
+import Register from './view/Login/register';
 import Welcome from './view/Welcome';
 import NotFound from './view/Common/NotFound';
 
@@ -18,6 +20,14 @@ const routes = [
   {
     path: '/',
     component: Welcome,
+  },
+  {
+    path: '/login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    component: Register,
   },
   {
     path: '/usermanager',

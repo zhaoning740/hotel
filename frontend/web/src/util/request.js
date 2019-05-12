@@ -2,18 +2,19 @@ import axios from 'axios'
 import qs from 'qs'
 
 //响应时间
-axios.defaults.timeout = 10 * 1000;
+axios.defaults.timeout = 15 * 1000;
 //配置请求头
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'; 
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'; 
+axios.defaults.headers.post['Content-Type'] = 'application/json'; 
 //配置接口地址       
 axios.defaults.baseURL = '';
 
 //POST传参序列化(添加请求拦截器)
 axios.interceptors.request.use((config) => {
     //在发送请求之前做某件事
-    if(config.method  === 'post'){
-        config.data = qs.stringify(config.data);
-    }
+    // if(config.method  === 'post'){
+    //     config.data = qs.stringify(config.data);
+    // }
     return config;
 },(error) =>{
     console.log('错误的传参')
@@ -25,11 +26,11 @@ axios.interceptors.response.use((res) =>{
     console.log('axios res===>', res.data)
     //对响应数据做些事
     if(!res.data.success){
-        return Promise.resolve(res);
+        return Promise.reject(res);
     }
-    return res;
+    return res.data;
 }, (error) => {
-    console.log('网络异常')
+    console.warn('网络异常')
     return Promise.reject(error);
 });
 

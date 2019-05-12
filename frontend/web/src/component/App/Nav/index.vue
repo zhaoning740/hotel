@@ -1,19 +1,19 @@
 <style scoped>
-  .navContainer{
-    text-align: right
-  }
+.navContainer {
+  text-align: right;
+}
 </style>
 <template>
   <div class="navContainer">
-    <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" icon="ios-person" />
-    <Dropdown style="margin-left: 20px">
+    <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" icon="ios-person"/>
+    <Dropdown style="margin-left: 20px" @on-click="clickItem">
       <a href="javascript:void(0)" style="font-size: 13px">
-        名字
+        手机号
         <Icon type="ios-arrow-down"></Icon>
       </a>
       <DropdownMenu slot="list">
-        <DropdownItem>个人中心</DropdownItem>
-        <DropdownItem>退出</DropdownItem>
+        <!-- <DropdownItem name="center">个人中心</DropdownItem> -->
+        <DropdownItem name="logout">退出</DropdownItem>
       </DropdownMenu>
     </Dropdown>
   </div>
@@ -24,6 +24,13 @@ export default {
   data() {
     return {};
   },
-  computed: {}
+  computed: {},
+  methods: {
+    clickItem(name) {
+      if (name === "logout") {
+        this.$router.replace("/login");
+      }
+    }
+  }
 };
 </script>

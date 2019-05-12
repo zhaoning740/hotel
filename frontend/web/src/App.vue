@@ -30,40 +30,70 @@
 }
 </style>
 <template>
-  <div class="layout">
-    <Layout :style="{minHeight: '100vh'}">
-      <Sider>
-        <SideBar/>
-      </Sider>
-      <Layout>
-        <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
-          <Nav />
-        </Header>
-        <Content :style="{padding: '0 16px 16px'}">
-          <Breadcrumb :style="{margin: '16px 0'}">
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem>Components</BreadcrumbItem>
-            <BreadcrumbItem>Layout</BreadcrumbItem>
-          </Breadcrumb>
-          <Card>
-            <div style="height: 600px">
-              <router-view></router-view>
-            </div>
-          </Card>
-        </Content>
+  <div>
+    <div class="layout" v-if="isLogin">
+      <Layout :style="{minHeight: '100vh'}">
+        <Sider>
+          <SideBar/>
+        </Sider>
+        <Layout>
+          <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
+            <Nav/>
+          </Header>
+          <Content :style="{padding: '0 16px 16px'}">
+            <Breadcrumb :style="{margin: '16px 0'}">
+              <BreadcrumbItem>Home</BreadcrumbItem>
+              <BreadcrumbItem>Components</BreadcrumbItem>
+              <BreadcrumbItem>Layout</BreadcrumbItem>
+            </Breadcrumb>
+            <Card>
+              <div style="height: 600px">
+                <router-view></router-view>
+              </div>
+            </Card>
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </div>
+    <div v-else>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 <script>
+import Login from '@/login';
 import { SideBar, Nav } from "./component/App";
 export default {
   data() {
-    return {};
+    return {
+      isLogin: true
+    };
+  },
+  created: function() {
+    if (window.location.hash === "#/login" || window.location.hash === "#/register") {
+      this.isLogin = false;
+    } else {
+      this.isLogin = true;
+    }
+    if (this.isLogin) {
+      Login.checkLogin();
+    }
+  },
+  watch: {
+    $route(to, from) {
+      if (to.path === "/login" || to.path === "/register") {
+        this.isLogin = false;
+      } else {
+        this.isLogin = true;
+      }
+      if (this.isLogin) {
+        Login.checkLogin();
+      }
+    }
   },
   components: {
     SideBar,
-    Nav,
+    Nav
   },
   computed: {}
 };

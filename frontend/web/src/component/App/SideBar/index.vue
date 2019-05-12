@@ -4,12 +4,12 @@
       <span>海舍民宿后台管理系统</span>
     </div>
     <MenuGroup title="常用管理">
-      <MenuItem name="usermanager" to="/usermanager">
+      <!-- <MenuItem name="usermanager" to="/usermanager">
         <Icon type="md-document"/>用户管理
       </MenuItem>
       <MenuItem name="shop" to="/shop">
         <Icon type="md-chatbubbles"/>门店管理
-      </MenuItem>
+      </MenuItem> -->
       <MenuItem name="ordermanager" to="/ordermanager">
         <Icon type="md-document"/>订单管理
       </MenuItem>

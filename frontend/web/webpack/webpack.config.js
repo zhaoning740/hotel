@@ -20,9 +20,9 @@ module.exports = {
     port: 3000,
     contentBase: path.resolve(process.cwd(), 'dist'),
     proxy: {
-      "/good": {
+      "/": {
         name:"API",  // 自己取名
-        target: "http://gphrtg.natappfree.cc",
+        target: "http://y7v2pw.natappfree.cc",
         changeOrigin: true,
         secure: false
       },

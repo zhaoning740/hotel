@@ -3,7 +3,7 @@
     <div class="buttonContainer">
       <Button type="primary" to="/house/create">新增房源</Button>
     </div>
-    <Table border :columns="columns" :data="data"></Table>
+    <Table :loading="loading" border :columns="columns" :data="data"></Table>
   </div>
 </template>
 
@@ -15,6 +15,7 @@ export default {
 
   data() {
     return {
+      loading: false,
       columns: [
         {
           title: '地区',
@@ -22,11 +23,28 @@ export default {
         },
         {
           title: "房源类型",
-          key: "type"
+          key: "type",
+          maxWidth: 100,
         },
         {
           title: "房源户型",
-          key: "layout"
+          key: "layout",
+          render: (h, params) => {
+            console.log(params.row.layout);
+            const param = JSON.parse(params.row.layout || '{}');
+            console.log(param, '<====parse param')
+            return h("div", [
+              h(
+                "span",
+                `${param.room || 0}卧室 · ${param.bed || 0}床 · ${param.bathroom || 0}卫生间 · 最多住${param.people || 0}人`
+              )
+            ]);
+          }
+        },
+        {
+          title: "价格(￥)",
+          key: "price",
+          maxWidth: 120,
         },
         {
           title: "地址",
@@ -66,7 +84,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.remove(params.index);
+                      this.remove(params);
                     }
                   }
                 },
@@ -76,54 +94,27 @@ export default {
           }
         }
       ],
-      data: [
-        {
-          id: 55,
-          area: "北京",
-          type: "独立公寓",
-          layout: "1卧室·1床·1卫生间·限制2人",
-          address: "北京市海淀区肖家河新村东区"
-        },
-         {
-          id: 2,
-          area: "天津",
-          type: "花园洋房",
-          layout: "12卧室·2床·1卫生间·限制4人",
-          address: "天津市河北区xxx路xx号"
-        },
-         {
-          id: 3,
-          area: "石家庄",
-          type: "普通住宅",
-          layout: "3卧室·3床·2卫生间·限制6人",
-          address: "石家庄市裕华区红旗大街"
-        },
-         {
-          id: 4,
-          area: "北京",
-          type: "独立公寓",
-          layout: "2卧室·2床·1卫生间·限制4人",
-          address: "北京市海淀区肖家河新村东区"
-        },
-         {
-          id: 5,
-          area: "重庆",
-          type: "独栋别墅",
-          layout: "8卧室·8床·3卫生间·限制30人",
-          address: "重庆xxx区xx路"
-        },
-      ]
+      data: []
     };
   },
   computed: {},
   methods: {
     fetchList() {
-      R.post('/user/userList')
+      this.loading = true;
+      R.post('/good/list')
       .then(res => {
-        if(res.data && Array.isArray(data)) {
-          this.data = res.data;
+        console.log('good/list',res);
+        if(res.data && Array.isArray(res.data)) {
+          this.data = res.data.map(item => ({
+            id: item.id,
+            area: item.area,
+            price: item.price,
+            type: item.goodType,
+            layout: item.goodHType,
+            address: item.address
+          }));
         }
-      })
+      }).finally(() => this.loading = false)
     },
     show(index) {
       this.$Modal.info({
@@ -131,8 +122,13 @@ export default {
         content: `test`
       });
     },
-    remove(index) {
-      this.data.splice(index, 1);
+    remove(params) {
+      R.get(`good/del/${params.row.id}`).then(res => {
+        if (res.success) {
+          this.$Message.success("删除成功!");
+          this.fetchList();
+        }
+      })
     },
   },
   mounted() {

@@ -1,51 +1,57 @@
 <template>
-  <Form ref="formValidate" :model="formItem" :rules="ruleValidate" :label-width="80">
-    <FormItem label="地区" prop="area">
-      <Cascader :data="formItem.area" size="large" trigger="hover"></Cascader>
+  <Form ref="formValidate" :model="formItem" :rules="ruleValidate" :label-width="120">
+    <FormItem label="地区">
+      <Cascader :data="areaList" size="large" trigger="hover" v-model="formItem.area"></Cascader>
     </FormItem>
+    <FormItem label="价格">
+      <Input v-model="formItem.price" placeholder="请输入价格"></Input>
+    </FormItem>
+    <FormItem label="起始日期" prop="time">
+      <DatePicker v-model="formItem.timeRange" format="yyyy年MM月dd日" type="daterange" placeholder="请选择" style="width: 400px"></DatePicker>
+    </FormItem>
+    
+
     <FormItem label="房源类型" prop="type">
       <Select v-model="formItem.type" clearable style="width:200px">
-        <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+        <Option v-for="item in cityList" :value="item.label" :key="item.value">{{ item.label }}</Option>
       </Select>
     </FormItem>
     <FormItem label="房源户型" prop="layout">
       <Row>
-          <Col span="1" style="text-align:right;">
-           卧室
-          </Col>
-          <Col span="4">
-            <Input v-model="formItem.phone" placeholder="请输入卧室数"></Input>
-          </Col>
-          <Col span="1" style="text-align:right;">
-           床
-          </Col>
-          <Col span="4">
-            <Input v-model="formItem.phone" placeholder="请输入床数"></Input>
-          </Col>
-          <Col span="2" style="text-align:right;">
-           卫生间
-          </Col>
-          <Col span="4">
-            <Input v-model="formItem.phone" placeholder="请输入卫生间数"></Input>
-          </Col>
-          <Col span="2" style="text-align:right;">
-           限住人数
-          </Col>
-          <Col span="4">
-            <Input v-model="formItem.phone" placeholder="请输入限住人数"></Input>
-          </Col>
+        <Col span="1" style="text-align:right;">卧室</Col>
+        <Col span="4">
+          <Input v-model="formItem.room" placeholder="请输入卧室数"></Input>
+        </Col>
+        <Col span="1" style="text-align:right;">床</Col>
+        <Col span="4">
+          <Input v-model="formItem.bed" placeholder="请输入床数"></Input>
+        </Col>
+        <Col span="2" style="text-align:right;">卫生间</Col>
+        <Col span="4">
+          <Input v-model="formItem.bathroom" placeholder="请输入卫生间数"></Input>
+        </Col>
+        <Col span="2" style="text-align:right;">限住人数</Col>
+        <Col span="4">
+          <Input v-model="formItem.people" placeholder="请输入限住人数"></Input>
+        </Col>
       </Row>
     </FormItem>
-    <FormItem label="门店地址" prop="address">
-      <Input v-model="formItem.address" placeholder="请输入门店地址"></Input>
+    <FormItem label="房源地址" prop="address">
+      <Input v-model="formItem.address" placeholder="请输入房源地址"></Input>
     </FormItem>
-    <FormItem label="门店信息" prop="info">
+    <FormItem label="房源信息" prop="info">
       <Input v-model="formItem.info" placeholder="请输入信息"></Input>
     </FormItem>
-    <FormItem label="详细信息" prop="detailinfo">
-        <Input v-model="formItem.textarea" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="详细信息" :maxlength=200></Input>
+    <FormItem label="详细信息" prop="detailInfo">
+      <Input
+        v-model="formItem.detailInfo"
+        type="textarea"
+        :autosize="{minRows: 2,maxRows: 5}"
+        placeholder="详细信息"
+        :maxlength="200"
+      ></Input>
     </FormItem>
-    <FormItem label="门店图片" prop="picture">
+    <FormItem label="房源展示图片" prop="picture">
       <div class="demo-upload-list" v-for="item in uploadList">
         <template v-if="item.status === 'finished'">
           <img :src="item.url">
@@ -79,7 +85,7 @@
       </Upload>
       <Modal title="View Image" v-model="visible">
         <img
-          :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'"
+          :src="imgUrl + imgName"
           v-if="visible"
           style="width: 100%"
         >
@@ -92,98 +98,137 @@
   </Form>
 </template>
 <script>
+import R from "@/request";
+import FormatDate from "@/date";
+
 export default {
   data() {
     return {
-      formItem: {
-        area: [{
-            value: 'beijing',
-            label: '北京',
+      imgUrl: 'http://y7v2pw.natappfree.cc/user/image/',
+      areaList: [
+          {
+            value: "北京",
+            label: "北京",
             children: [
-                {
-                    value: 'gugong',
-                    label: '故宫'
-                },
-                {
-                    value: 'tiantan',
-                    label: '天坛'
-                },
-                {
-                    value: 'wangfujing',
-                    label: '王府井'
-                }
+              {
+                value: "故宫",
+                label: "故宫"
+              },
+              {
+                value: "天坛",
+                label: "天坛"
+              },
+              {
+                value: "王府井",
+                label: "王府井"
+              }
             ]
-        }, {
-            value: 'jiangsu',
-            label: '江苏',
+          },
+          {
+            value: "江苏",
+            label: "江苏",
             children: [
-                {
-                    value: 'nanjing',
-                    label: '南京',
-                    children: [
-                        {
-                            value: 'fuzimiao',
-                            label: '夫子庙',
-                        }
-                    ]
-                },
-                {
-                    value: 'suzhou',
-                    label: '苏州',
-                    children: [
-                        {
-                            value: 'zhuozhengyuan',
-                            label: '拙政园',
-                        },
-                        {
-                            value: 'shizilin',
-                            label: '狮子林',
-                        }
-                    ]
-                }
-            ],
-        }],
-        type: '',
-        textarea: 'kajsdbvljbkjbvkjbl',
+              {
+                value: "南京",
+                label: "南京",
+                children: [
+                  {
+                    value: "夫子庙",
+                    label: "夫子庙"
+                  }
+                ]
+              },
+              {
+                value: "苏州",
+                label: "苏州",
+                children: [
+                  {
+                    value: "拙政园",
+                    label: "拙政园"
+                  },
+                  {
+                    value: "狮子林",
+                    label: "狮子林"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+      //表单数据
+      formItem: {
+        userid: '', // 用户id，从localstorage中获取
+        area: [],
+        price: "",
+        timeRange: [],
+        starttime: '',
+        endtime: '',
+        type: "",
         address: "",
-        info:'jbkjb'
+        info: "",
+        detailInfo: "",
+        room: 0,
+        bed: 0,
+        bathroom: 0,
+        people: 0,
       },
       cityList: [
-            {
-                label: '独立公寓',
-                value: 'apartment'
-            },
-            {
-                label: '花园洋房',
-                value: 'gardenhouse'
-            },
-            {
-                label: '普通住宅',
-                value: 'normal'
-            },
-            {
-                label: '独栋别墅',
-                value: 'villa'
-            }
-        ],
+        {
+          label: "独立公寓",
+          value: "apartment"
+        },
+        {
+          label: "花园洋房",
+          value: "gardenhouse"
+        },
+        {
+          label: "普通住宅",
+          value: "normal"
+        },
+        {
+          label: "独栋别墅",
+          value: "villa"
+        }
+      ],
       ruleValidate: {
         area: [
           {
-            required: true,
+            // required: true,
             message: "请选择地区",
+            trigger: "blur"
+          }
+        ],
+        price: [
+          {
+            // required: true,
+            message: "请填写价格",
+            trigger: "change"
+          }
+        ],
+        starttime: [
+          {
+            // required: true,
+            message: "请填起始时间",
+            trigger: "blur"
+          }
+        ],
+        endtime: [
+          {
+            // required: true,
+            message: "请填写结束时间",
             trigger: "blur"
           }
         ],
         type: [
           {
-            required: true,
+            // required: true,
             message: "请选择房源类型",
             trigger: "blur"
           }
         ],
         layout: [
           {
-            required: true,
+            // required: true,
             message: "请选择房源户型",
             trigger: "blur"
           }
@@ -197,12 +242,12 @@ export default {
         ],
         info: [
           {
-            required: true,
+            // required: true,
             message: "请输入门店信息",
             trigger: "blur"
           }
         ],
-        detailinfo: [
+        detailInfo: [
           {
             required: true,
             message: "请输入门店详细信息",
@@ -211,55 +256,77 @@ export default {
         ],
         picture: [
           {
-            required: true,
+            // required: true,
             message: "请上传图片",
             trigger: "blur"
           }
-        ],
+        ]
       },
-      defaultList: [
-        {
-          name: "a42bdcc1178e62b4694c830f028db5c0",
-          url:
-            "https://o5wwk8baw.qnssl.com/a42bdcc1178e62b4694c830f028db5c0/avatar"
-        },
-        {
-          name: "bc7521e033abdd1e92222d733590f104",
-          url:
-            "https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar"
-        }
-      ],
+      defaultList: [],
       imgName: "",
       visible: false,
       uploadList: []
     };
   },
-  created: function () {
-    console.log(this.$route,111111111111111111,this.$route.params.pathMatch)
-    if(this.$route.params.pathMatch == 'detail'){
-
+  created: function() {
+    if (this.$route.params.pathMatch == "detail") {
       this.fetchDetail(this.$route.query.id);
     }
-
   },
-  mounted: function () {
-    
+  mounted: function() {
+    const userId = window.localStorage.getItem('ID');
+    if (userId) {
+      console.log('getUserId===>', userId)
+      this.formItem.userid = userId;
+    }
   },
   methods: {
     onSubmit(name) {
       console.log("onSubmit===>", this.formItem);
-      console.log("refs===>", this.$refs);
+      const param = {
+        userid: window.localStorage.getItem('ID'),
+        descKey: this.formItem.info,
+        describet: this.formItem.detailInfo,
+        price: this.formItem.price,
+        area: this.formItem.area.join('/'),
+        goodType: this.formItem.type,
+        starttime: FormatDate.dateToString(this.formItem.timeRange[0]),
+        endtime: FormatDate.dateToString(this.formItem.timeRange[1]),
+        goodHType: JSON.stringify({
+          room: this.formItem.room,
+          bed: this.formItem.room,
+          bathroom: this.formItem.bathroom,
+          people: this.formItem.people,
+        }),
+        address: this.formItem.address,
+        picture: this.uploadList.map(item => item.name)
+      }
+      if (this.$route.params.pathMatch == "detail") {
+        param.id = this.$route.query.id;
+      }
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.$Message.success("Success!");
+          // this.$Message.success("Success!");
+          this.submitCreate(param)
         } else {
           this.$Message.error("Fail!");
         }
       });
     },
     cancle() {
-      console.log(this);
       this.$router.back();
+    },
+    submitCreate(params = this.formItem) {
+      this.$Spin.show();
+      R.post("/good/insert", { ...params }).then(res => {
+        this.$Spin.hide();
+        if (res.success) {
+          this.$Message.success("操作成功");
+          this.$router.replace("/housemanager");
+        }
+      }).finally(() => {
+        this.$Spin.hide();
+      });
     },
     handleView(name) {
       this.imgName = name;
@@ -270,9 +337,12 @@ export default {
       this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
     },
     handleSuccess(res, file) {
-      file.url =
-        "https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar";
-      file.name = "7eb99afb9d5f317c912f08b5212fd69a";
+      console.log('upload==>', res, file, this.$refs.upload.fileList)
+      if (res.success) {
+        file.url = this.imgUrl+ res.data;
+        file.name = res.data;
+      }
+      this.uploadList = this.$refs.upload.fileList;
     },
     handleFormatError(file) {
       this.$Notice.warning({
@@ -298,14 +368,42 @@ export default {
       }
       return check;
     },
-    handleOpen () {
-        this.visible = true;
+    handleOpen() {
+      this.visible = true;
     },
-    handleClose () {
-        this.visible = false;
+    handleClose() {
+      this.visible = false;
     },
-    fetchDetail(id){
-      console.log("fetch" + id)
+    fetchDetail(id) {
+      this.$Spin.show();
+      R.get(`/good/detail/${id}`).then(res => {
+        this.$Spin.hide();        
+        if(res.success) {
+          if (res.data.picture && Array.isArray(res.data.picture)) {
+            this.uploadList = res.data.picture.map(item => ({
+              name: item,
+              url: this.imgUrl + item,
+              status: 'finished',
+            }))
+          }
+          const parseGoodsLayout = JSON.parse(res.data.goodHType);
+          this.formItem = {
+            id: res.data.id,
+            detailInfo: res.data.describet,
+            price: res.data.price,
+            area: res.data.area.split('/'),
+            room: parseGoodsLayout.room,
+            bed: parseGoodsLayout.bed,
+            bathroom: parseGoodsLayout.bathroom,
+            people: parseGoodsLayout.people,
+            type: res.data.goodType,
+            address: res.data.address,
+            timeRange: [res.data.starttime, res.data.endtime],
+          }
+        }
+      }).finally(() => {
+        this.$Spin.hide();
+      })
     }
   }
 };

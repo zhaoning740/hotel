@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import iView from 'iview';
-import R from '@/request';
 
 import App from './App.vue';
 import router from './router';

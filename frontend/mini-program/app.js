@@ -108,6 +108,6 @@ App({
     token: null,
     session_key: null,
     userInfo: {},
-    apiUrl: 'http://gphrtg.natappfree.cc'
+    apiUrl: 'http://y7v2pw.natappfree.cc'
   }
 })

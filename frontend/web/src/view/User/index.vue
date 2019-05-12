@@ -3,7 +3,7 @@
     <div class="buttonContainer">
       <Button type="primary" to="/user/create">新增用户</Button>
     </div>
-    <Table border :columns="columns" :data="data"></Table>
+    <Table :loading="loading" border :columns="columns" :data="data"></Table>
   </div>
 </template>
 
@@ -15,6 +15,7 @@ export default {
 
   data() {
     return {
+      loading: false,
       columns: [
         {
           title: '用户名',
@@ -78,11 +79,15 @@ export default {
   computed: {},
   methods: {
     fetchList() {
+      this.loading = true;
       R.post('/user/userList')
       .then(res => {
         if(res.data && Array.isArray(data)) {
           this.data = res.data;
         }
+      })
+      .finally(() => {
+        this.loading = false;
       })
     },
     show(index) {
