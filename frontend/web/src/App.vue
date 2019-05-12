@@ -31,7 +31,7 @@
 </style>
 <template>
   <div>
-    <div class="layout" v-if="isLogin">
+    <div class="layout" v-if="!isLogin">
       <Layout :style="{minHeight: '100vh'}">
         <Sider>
           <SideBar/>
@@ -66,14 +66,14 @@ import { SideBar, Nav } from "./component/App";
 export default {
   data() {
     return {
-      isLogin: true
+      isLogin: false
     };
   },
   created: function() {
     if (window.location.hash === "#/login" || window.location.hash === "#/register") {
-      this.isLogin = false;
-    } else {
       this.isLogin = true;
+    } else {
+      this.isLogin = false;
     }
     if (this.isLogin && !Login.checkLogin()) {
       this.$router.replace('/login');
@@ -82,9 +82,9 @@ export default {
   watch: {
     $route(to, from) {
       if (to.path === "/login" || to.path === "/register") {
-        this.isLogin = false;
-      } else {
         this.isLogin = true;
+      } else {
+        this.isLogin = false;
       }
       if (this.isLogin && !Login.checkLogin()) {
         this.$router.replace('/login');
