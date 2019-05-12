@@ -75,8 +75,8 @@ export default {
     } else {
       this.isLogin = true;
     }
-    if (this.isLogin) {
-      Login.checkLogin();
+    if (this.isLogin && !Login.checkLogin()) {
+      this.$router.replace('/login');
     }
   },
   watch: {
@@ -86,8 +86,8 @@ export default {
       } else {
         this.isLogin = true;
       }
-      if (this.isLogin) {
-        Login.checkLogin();
+      if (this.isLogin && !Login.checkLogin()) {
+        this.$router.replace('/login');
       }
     }
   },
