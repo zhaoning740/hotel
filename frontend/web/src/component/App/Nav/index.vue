@@ -8,7 +8,7 @@
     <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" icon="ios-person"/>
     <Dropdown style="margin-left: 20px" @on-click="clickItem">
       <a href="javascript:void(0)" style="font-size: 13px">
-        手机号
+        admin
         <Icon type="ios-arrow-down"></Icon>
       </a>
       <DropdownMenu slot="list">
