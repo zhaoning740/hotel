@@ -30,9 +30,7 @@ export default {
           title: "房源户型",
           key: "layout",
           render: (h, params) => {
-            console.log(params.row.layout);
             const param = JSON.parse(params.row.layout || '{}');
-            console.log(param, '<====parse param')
             return h("div", [
               h(
                 "span",
