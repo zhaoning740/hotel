@@ -161,29 +161,39 @@ Page({
     })
   },
   // 允许授权
-  onGotUserInfo(e){
-    app.globalData.showLoginModal = false;
-    this.setData({
-      showModal: app.globalData.showLoginModal
-    })
-  },
+  // onGotUserInfo(e){
+  //   app.globalData.showLoginModal = false;
+  //   this.setData({
+  //     showModal: app.globalData.showLoginModal
+  //   })
+  // },
 
   onLoad: function() {
 
   },
   onShow: function() {
     // 授权
-    this.setData({
-      showModal: app.globalData.showLoginModal
-    })
-    // app.ready().then(() => {
-    //   this.callFun()
-    // }).catch()
-    this.callFun()
+    // this.setData({
+    //   showModal: app.globalData.showLoginModal
+    // })
+    app.ready().then(() => {
+      this.fetchGoodList()
+    }).catch()
+    // this.fetchGoodList()
   },
-  callFun() {
+  fetchGoodList() {
     var _this = this
-
+    wx.request({
+      url: app.globalData.apiUrl + '/good/list',
+      method: 'post',
+      success: (res) => {
+        if(res.success && Array.isArray(res.data)) {
+          _this.setData({
+            proList: res.data
+          })
+        }
+      },
+    })
   },
 
 })

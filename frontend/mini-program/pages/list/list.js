@@ -48,7 +48,7 @@ Page({
   },
   //请求列表
   fetchAll() {
-
+    console.log('liebiao ')
   },
   // 跳转详情页
   tapProInfo(e) {

@@ -27,14 +27,26 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //判断下id有没有
+    if (!app.globalData.id) {
+      wx.showModal({
+        title: '提示',
+        content: '未获取到登录详细，请返回重试！',
+        showCancel: false,
+        success(res) {
+          if (res.confirm) {
+            wx.navigateBack()
+          }
+        }
+      })
+    }
   },
 
   /**
@@ -109,24 +121,28 @@ Page({
       success: function (res) {
         console.log('/user/register==>', res)
         const {
-          data: {
-            data
-          }
+          data
         } = res;
-        if (data && data.success) {
+        if (data && data.success && data.data) {
           // 调用成功
+          // console.log('USER_INFO===>',data.data)
+          wx.setStorage({
+            key: "USER_INFO",
+            data: data.data
+          });
           wx.showToast({
             title: '注册成功',
-            success: () => {
-              wx.navigateTo({
-                url: '/pages/index/index',
-              })
-            }
+            duration: 2000
           })
-          //跳index
+          setTimeout(function(){
+            wx.switchTab({
+              url: '/pages/index/index',
+            })
+          },2000)
         } else {
           wx.showToast({
             title: '注册失败' + data.message,
+            icon: 'none'
           })
           console.warn('登录失败', res.errMsg)
         }

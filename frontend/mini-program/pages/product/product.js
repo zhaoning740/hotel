@@ -32,9 +32,37 @@ Page({
       content: '确认支付',
       success(res) {
         if (res.confirm) {
-          wx.navigateTo({
-            url: '/pages/success/success'
+          wx.request({
+            url: app.globalData.apiUrl + '/order/insert',
+            data: {
+              account: app.globalData.id,
+              store: '123456',
+              checkintime: '2019-5-4 12:19:17',
+              checkouttime: '2019-5-4 12:19:17',
+              day: '1',
+              money: '234'
+            },
+            header: {
+              'content-type': 'application/json' // 默认值
+            },
+            method: 'post',
+            success(res) {
+              console.log(res.data)
+              if (res.success){
+                wx.navigateTo({
+                  url: '/pages/success/success'
+                })
+              }else{
+                wx.showToast({
+                  title: '支付失败',
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+              
+            }
           })
+         
         } else if (res.cancel) {
           console.log('用户点击取消')
         }

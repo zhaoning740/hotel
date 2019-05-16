@@ -7,7 +7,8 @@
     "pages/list/list",
     "pages/customer/index",
     "pages/orderInfo/orderInfo",
-    "pages/success/success"
+    "pages/success/success",
+    "pages/login/login"
   ],
   "permission": {
     "scope.userLocation": {

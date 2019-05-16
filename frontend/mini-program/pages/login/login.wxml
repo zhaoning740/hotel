@@ -1,0 +1,3 @@
+
+<view class='logo'><image src='http://static.heyjuice.cn/Public/Home/images/share_logo.png' style='height:200rpx; width:200rpx;'></image></view>
+<view class='login_btn'><button type='primary' class='bgcolor' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo" hover-class="none">微信登陆</button></view>

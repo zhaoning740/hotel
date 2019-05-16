@@ -1,0 +1,6 @@
+.logo{text-align: center; padding-top: 10%;}
+.logo image{border-radius: 100%;}
+.login_h2{text-align: center; font-size: 40px; padding-top: 20rpx;}
+.login_p{text-align: center; font-size: 16px;}
+.login_btn{padding: 80rpx;}
+.login_btn button{border-radius: 8rpx;}
