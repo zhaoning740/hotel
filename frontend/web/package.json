@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "webpack-dev-server --config ./webpack/webpack.dev.js --progress",
-    "build": "webpack --config ./webpack/webpack.config.js --mode development --progress"
+    "build": "webpack --config ./webpack/webpack.prod.js --progress"
   },
-  "author": "zhaoning740",
+  "author": "zhaoning740, baylin87",
   "license": "ISC",
   "devDependencies": {
     "@intervolga/optimize-cssnano-plugin": "^1.0.6",
