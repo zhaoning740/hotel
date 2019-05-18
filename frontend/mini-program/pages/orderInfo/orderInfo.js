@@ -1,28 +1,23 @@
 const app = getApp();
+const util = require('../../utils/util.js');
+const R = require('../../utils/request.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    orderList:{
-      code: 38798865778,
-      create_time: "2019-1-26",
-      receiver_name: "zhao白白",
-      receiver_phone: '13877766544',
-      start_time: '2019-3-4',
-      end_time: '2019-3-6',
-      receiver_address: '北京市朝阳区望京新城2号',
-      status_name: '已使用',
-      real_money: '223'
-    }
+    orderId: '',
+    orderInfo:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      orderId: options.orderId,
+    })
   },
 
   /**
@@ -36,7 +31,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.fetchOrderDetail()
   },
 
   /**
@@ -72,5 +67,36 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  fetchOrderDetail: function (id = this.data.orderId) {
+    const _this = this;
+    R.request({
+      url: '/order/list/',
+      method: 'post',
+      data: { id: app.globalData.id },
+      success: (res) => {
+        if (Array.isArray(res.data)) {
+          const info = res.data.find(i => i.id == id) || {};
+          info.createtime = util.formatUnixtime(info.createtime)
+          switch(info.state) {
+            case 0:
+              info.state = '未使用';
+              break;
+            case 1:
+              info.state = '已使用';
+              break;
+          }
+          console.log('orderInfo', info)
+          _this.setData({
+            orderInfo: info,
+          })
+        }
+      },
+      fail: () => {
+        wx.navigateBack({
+          delta: 1,
+        })
+      }
+    })
+  },
 })

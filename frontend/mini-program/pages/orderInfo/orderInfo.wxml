@@ -1,28 +1,28 @@
 <view class="orderinfo-main">
-  <view class="orderlist-list">
-    <view class='orderlist-header'>
-      <view class='orderlist-ordercode'>订单号：{{orderList.code}}</view>
-      <view class='orderlist-status'>{{orderList.create_time}}</view>
+  <view class="orderInfo-list">
+    <view class='orderInfo-header'>
+      <view class='orderInfo-ordercode'>订单号：{{orderInfo.id}}</view>
+      <view class='orderInfo-status'>{{orderInfo.createtime}}</view>
     </view>
     
   </view>
   <view class='orderinfo-user'>
-    <view class='orderinfo-user-item'>联系人：{{orderList.receiver_name}}</view>
-    <view class='orderinfo-user-item'>联系方式：{{orderList.receiver_phone}}</view>
-    <view class='orderinfo-user-item'>入住时间：{{orderList.start_time}}</view>
-    <view class='orderinfo-user-item'>结束时间：{{orderList.end_time}}</view>
-    <view class='orderinfo-user-item'>地址：{{orderList.receiver_address}}</view>   
-    <view class='orderinfo-user-item'>订单状态：{{orderList.status_name}}</view>
+    <view class='orderinfo-user-item'>联系人：{{orderInfo.account}}</view>
+    <view class='orderinfo-user-item'>联系方式：{{orderInfo.receiver_phone}}</view>
+    <view class='orderinfo-user-item'>入住时间：{{orderInfo.checkintime}}</view>
+    <view class='orderinfo-user-item'>结束时间：{{orderInfo.checkouttime}}</view>
+    <view class='orderinfo-user-item'>地址：{{orderInfo.address}}</view>   
+    <view class='orderinfo-user-item'>订单状态：{{orderInfo.state}}</view>
     
   </view>
   <!-- <view class='hj-cell'>
     <view class='hj-cell-left'>商品合计</view>
-    <view class='hj-cell-center' style='padding-right:10rpx; font-size:24rpx;'>￥{{orderList.order_info.product_money}}</view>
+    <view class='hj-cell-center' style='padding-right:10rpx; font-size:24rpx;'>￥{{orderInfo.order_info.product_money}}</view>
   </view> -->
  
   <view class='hj-cell'>
     <view class='hj-cell-left'></view>
-    <view class='hj-cell-center' style='padding-right:10rpx; font-size:24rpx;'>实付金额：<text style='color:#fd746c;'>￥{{orderList.real_money}}</text></view>
+    <view class='hj-cell-center' style='padding-right:10rpx; font-size:24rpx;'>实付金额：<text style='color:#fd746c;'>￥{{orderInfo.money}}</text></view>
   </view>
   
 </view>
