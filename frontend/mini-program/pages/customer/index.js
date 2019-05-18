@@ -1,7 +1,7 @@
 // pages/customer/index'.js
 const app = getApp();
+const R = require('../../utils/request.js');
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -91,22 +91,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.ready().then(() => {
-      if (app.globalData.userInfo) {
-        this.setData({
-          userInfo: app.globalData.userInfo,
-        })
-      }
-    })
-  },
-  // 跳转详情页
-  toInfoUrl(e){
-    console.log(e.target.id)
-    const id = e.target.id;
-    const url = '/pages/orderInfo/orderInfo?id=' + id;
-    wx:wx.navigateTo({
-      url
-    })
+    // app.ready().then(() => {
+    //   if (app.globalData.userInfo) {
+    //     this.setData({
+    //       userInfo: app.globalData.userInfo,
+    //     })
+    //   }
+    // })
   },
 
   /**
@@ -120,7 +111,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.fetchOrderList()
   },
 
   /**
@@ -156,5 +147,33 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  fetchOrderList: function (param = {}) {
+    const _this = this;
+    R.request({
+      url: '/order/list',
+      method: 'post',
+      data: {
+        ...param,
+        id: app.globalData.id
+      },
+      success: (res) => {
+        if (Array.isArray(res.data)) {
+          const list = res.data;
+          _this.setData({
+            orderList: list
+          })
+        }
+      }
+    })
+  },
+  /** 跳转详情页 */
+  toInfoUrl(e) {
+    console.log(e.target.id)
+    const id = e.target.id;
+    const url = '/pages/orderInfo/orderInfo?id=' + id;
+    wx: wx.navigateTo({
+      url
+    })
+  },
 })

@@ -4,6 +4,7 @@
     "pages/logs/logs",
     "pages/register/index",
     "pages/product/product",
+    "pages/submit/submit",
     "pages/list/list",
     "pages/customer/index",
     "pages/orderInfo/orderInfo",

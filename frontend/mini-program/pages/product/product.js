@@ -1,11 +1,14 @@
 // pages/product/product.js
 const app = getApp()
+const R = require('../../utils/request.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    id: '', //商品id
+    productInfo: {},
     indicatorDots: true,
     autoplay: true,
     interval: 4000,
@@ -25,50 +28,6 @@ Page({
       id: options.id
     })
   },
-  // 支付
-  toPayBtn:function(){
-    wx.showModal({
-      title: '提示',
-      content: '确认支付',
-      success(res) {
-        if (res.confirm) {
-          wx.request({
-            url: app.globalData.apiUrl + '/order/insert',
-            data: {
-              account: app.globalData.id,
-              store: '123456',
-              checkintime: '2019-5-4 12:19:17',
-              checkouttime: '2019-5-4 12:19:17',
-              day: '1',
-              money: '234'
-            },
-            header: {
-              'content-type': 'application/json' // 默认值
-            },
-            method: 'post',
-            success(res) {
-              console.log(res.data)
-              if (res.success){
-                wx.navigateTo({
-                  url: '/pages/success/success'
-                })
-              }else{
-                wx.showToast({
-                  title: '支付失败',
-                  icon: 'none',
-                  duration: 2000
-                })
-              }
-              
-            }
-          })
-         
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    })
-  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -80,8 +39,8 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: function (option) {
+    this.fetchProductDetail()
   },
 
   /**
@@ -117,5 +76,74 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  fetchProductDetail: function (id = this.data.id) {
+    const _this = this;
+    R.request({
+      url: '/good/detail/' + id,
+      method: 'get',
+      success: (res) => {
+        if (res.data) {
+          console.log('/good/detail', res.data)
+          const info = {
+            ...res.data,
+            goodHType: res.data.goodHType ? JSON.parse(res.data.goodHType) : {},
+            picture: (Array.isArray(res.data.picture) && res.data.picture.map(i => (app.globalData.apiUrl + app.globalData.imgUrl + i))) || ['/images/3.jpg','/images/4.jpg'],
+          };
+          console.log(info.picture)
+          _this.setData({
+            productInfo: info,
+            bannerList: info.picture,
+          })
+        }
+      }
+    })
+  },
+  // 支付
+  toPayBtn: function () {
+    const that = this;
+    wx.navigateTo({
+      url: '/pages/submit/submit?id=' + that.data.id,
+    })
+    // wx.showModal({
+    //   title: '提示',
+    //   content: '确认支付',
+    //   success(res) {
+    //     if (res.confirm) {
+    //       R.request({
+    //         url: '/order/insert',
+    //         data: {
+    //           account: app.globalData.id,
+    //           store: '123456',
+    //           checkintime: that.data.productInfo.starttime || '2019-5-4 12:19:17',
+    //           checkouttime: that.data.productInfo.endtime || '2019-5-4 12:19:17',
+    //           day: '1',
+    //           money: '234'
+    //         },
+    //         header: {
+    //           'content-type': 'application/json' // 默认值
+    //         },
+    //         method: 'post',
+    //         success(res) {
+    //           if (res.success) {
+    //             wx.navigateTo({
+    //               url: '/pages/success/success'
+    //             })
+    //           } else {
+    //             wx.showToast({
+    //               title: '支付失败',
+    //               icon: 'none',
+    //               duration: 2000
+    //             })
+    //           }
+
+    //         }
+    //       })
+
+    //     } else if (res.cancel) {
+    //       console.log('用户点击取消')
+    //     }
+    //   }
+    // })
+  },
 })

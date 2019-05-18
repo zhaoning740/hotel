@@ -95,6 +95,8 @@ App({
         _this.login()
         reject('NO USER_INFO id')
       } else {
+        _this.globalData.id = userInfo.id;
+        _this.globalData.userInfo = userInfo;
         wx.checkSession({
           success(res) {
             console.log('checkSuccess==>', res)
@@ -114,10 +116,9 @@ App({
   globalData: {
     id: '',//用户id
     showLoginModal: false,
-    token: null,
-    session_key: null,
+    searchParam: {},
     userInfo: {},
-    apiUrl: 'http://4kddex.natappfree.cc',
+    apiUrl: 'http://8bhydv.natappfree.cc',
     imgUrl: '/user/image/'
   }
 })

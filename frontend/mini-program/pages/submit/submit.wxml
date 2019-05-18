@@ -1,0 +1,36 @@
+<!--pages/submit/submit.wxml-->
+<van-panel title="{{productInfo.area}}·{{productInfo.goodType}}" desc="{{productInfo.describet}}" status="¥{{productInfo.price}}" use-footer-slot>
+  <view>
+    <text>入住信息确认</text>
+    <van-cell-group title="">
+      <van-cell title="入住时间" is-link value="{{showBeginTime}}" bind:click="onChangeStartTime"/>
+      <van-cell title="入住天数">
+        <van-stepper value="{{ 1 }}" bind:change="onDayChange" integer="true" />
+      </van-cell>
+      <van-field
+        value="{{ userInfo.phone }}"
+        label="联系电话"
+        placeholder="请输入电话号码"
+        bind:change="onChange"
+        is-link
+      />
+      <van-field
+        value="{{ submitInfo.message }}"
+        label="留言"
+        type="textarea"
+        placeholder="请输入留言"
+        autosize
+        is-link
+      />
+    </van-cell-group>
+  </view>
+</van-panel>
+<van-submit-bar
+  price="{{ submitInfo.day * productInfo.price * 100 || 0 }}"
+  button-text="提交订单"
+  bind:submit="onSubmit"
+/>
+<!-- 起始日期 -->
+<van-popup show="{{ showStart }}" position="bottom">
+  <van-datetime-picker type="date" value="{{ currentDate }}" min-date="{{ minDate }}" bind:confirm="onConfirmTime" bind:cancel="onCancelTime" formatter="{{ formatter }}" />
+</van-popup>

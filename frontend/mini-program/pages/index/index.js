@@ -78,6 +78,8 @@ Page({
       checkintime: this.data.showBeginTime !== '选择起始日期' ? (this.data.showBeginTime + ' 00:00:00') : null,
       checkouttime: this.data.showEndTime !== '选择结束日期' ? (this.data.showEndTime + ' 23:59:59') : null
     }
+    // 存下search_Param，后面确认订单给默认值用，省得页面传
+    app.globalData.searchParam = param;
     this.fetchGoodList(param)
   },
   //选择起始时间
