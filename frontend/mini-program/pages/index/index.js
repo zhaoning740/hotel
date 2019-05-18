@@ -26,7 +26,7 @@ Page({
       } else if (type === 'month') {
         return `${value}月`;
       }
-      return value;
+      return `${value}日`;
     },
     /** banner */
     bannerList: [{
@@ -64,7 +64,29 @@ Page({
         120105: '河北区',
       }
     },
-    proList: []
+    proList: [
+      {
+        id: 1,
+        desc: '独立房间·1卧1床1卫',
+        adress: '安德里北街地铁+限女生+吃货天堂+独立公寓',
+        image: '/images/1.jpg',
+        money: 189
+      },
+      {
+        id: 2,
+        desc: '独立公寓·2卧2床1卫',
+        adress: '西局地铁口XX大厦北行560m',
+        image: '/images/6.jpeg',
+        money: 268
+      },
+      {
+        id: 3,
+        desc: '海景别墅·5卧8床2卫',
+        adress: '中南海XX大厦北行195号',
+        image: '/images/3.jpg',
+        money: 2888
+      },
+    ]
   },
   //事件处理函数
   bindViewTap: function() {
@@ -80,7 +102,10 @@ Page({
     }
     // 存下search_Param，后面确认订单给默认值用，省得页面传
     app.globalData.searchParam = param;
-    this.fetchGoodList(param)
+    // this.fetchGoodList(param)
+    wx.navigateTo({
+      url: '/pages/list/list',
+    })
   },
   //选择起始时间
   startTime() {
@@ -151,7 +176,7 @@ Page({
 
   },
   onShow: function() {
-    this.fetchGoodList()
+    // this.fetchGoodList()
   },
   /** 请求商品列表 */
   fetchGoodList(data = {}) {

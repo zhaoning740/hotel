@@ -1,27 +1,14 @@
 // pages/product/product.js
 const app = getApp()
+const util = require('../../utils/util.js')
+const R = require('../../utils/request.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    proList: [
-      {
-        id: 1,
-        desc: '独立房间·1卧1床1卫',
-        adress: '安德里北街地铁+限女生+吃货天堂+独立公寓',
-        image: '/images/1.jpg',
-        money: 189
-      },
-      {
-        id: 2,
-        desc: '独立公寓·2卧2床1卫',
-        adress: '西局地铁口XX大厦北行560m',
-        image: '/images/6.jpeg',
-        money: 268
-      }
-    ]
+    proList: []
   },
 
   /**
@@ -42,9 +29,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.ready().then(() => {
-      this.fetchAll()
-    }).catch();
+    const param = app.globalData.searchParam;
+    this.fetchGoodList(param)
   },
   //请求列表
   fetchAll() {
@@ -91,5 +77,25 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  /** 请求商品列表 */
+  fetchGoodList(data = {}) {
+    var _this = this
+    R.request({
+      url: '/good/list',
+      method: 'post',
+      data: data,
+      success: (res) => {
+        if (Array.isArray(res.data)) {
+          const list = res.data.map(item => ({
+            ...item,
+            picture: (Array.isArray(item.picture) && item.picture.map(i => (app.globalData.apiUrl + app.globalData.imgUrl + i))) || ['/images/1.jpg'],
+          }))
+          _this.setData({
+            proList: list
+          })
+        }
+      }
+    })
+  },
 })
