@@ -3,7 +3,7 @@
   <view wx:if="{{proList.length !== 0}}">
       <view class='list_box' wx:for='{{proList}}' wx:for-item='item' wx:key='{{item.id}}' bindtap='tapProInfo' id='{{item.id}}'>
         <image class='imgTop' src='{{item.picture[0]}}' style='width:100%' mode='widthFix' lazy-load='true'></image>
-        <view class='ist_box_desc'>{{item.describet}}</view>
+        <view class='ist_box_desc'>{{item.descKey}}</view>
         <view class='ist_box_dress text'>{{item.address}}</view>
         <view class='ist_box_money'>¥ {{item.price}} 每晚</view>
       </view>

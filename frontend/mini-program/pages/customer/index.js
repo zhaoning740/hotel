@@ -82,7 +82,13 @@ Page({
       },
       success: (res) => {
         if (Array.isArray(res.data)) {
-          const list = res.data;
+          const list = res.data.map(item => ({
+            ...item,
+            good: {
+              ...item.good,
+              picture: (item.good && Array.isArray(item.good.picture) && item.good.picture.map(i => (app.globalData.apiUrl + app.globalData.imgUrl + i))) || ['/images/1.jpg'],
+            }
+          }));
           const orderUsedList = list.filter(item => item.state === 1);
           const orderUnusedList = list.filter(item => item.state === 0);
           _this.setData({

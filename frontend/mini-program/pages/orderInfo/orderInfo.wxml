@@ -12,6 +12,7 @@
     <view class='orderinfo-user-item'>入住时间：{{orderInfo.checkintime}}</view>
     <view class='orderinfo-user-item'>结束时间：{{orderInfo.checkouttime}}</view>
     <view class='orderinfo-user-item'>地址：{{orderInfo.address}}</view>   
+    <view class='orderinfo-user-item'>总价: ¥{{orderInfo.money}}</view>   
     <view class='orderinfo-user-item'>订单状态：{{orderInfo.state}}</view>
     
   </view>

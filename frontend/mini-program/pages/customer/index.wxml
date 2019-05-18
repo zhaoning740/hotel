@@ -16,7 +16,7 @@
   <van-tabs active="{{ active }}" color='#1ed6c4' bind:change="onTabChange">
     <van-tab title="全部订单">
       <view wx:if="{{orderList.length > 0}}">
-        <van-card custom-class='order' wx:for='{{orderList}}' wx:for-item='item' wx:key='item' centered='true' num="{{item.day}}" price="{{item.money}}" desc="{{item.content}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}'
+        <van-card custom-class='order' wx:for='{{orderList}}' wx:for-item='item' wx:key='item' centered='true' num="{{item.day}}" price="{{item.good.price}}" desc="{{item.good.area}}" title="{{item.good.descKey}}" thumb="{{ item.good.picture[0] }}" bindtap='toInfoUrl' id='{{item.id}}' lazy-load="true"
         />
       </view>
       <view wx:else class='noListInfo'>
@@ -26,7 +26,7 @@
 
     <van-tab title="已使用">
       <view wx:if="{{orderUsedList.length > 0}}">
-      <van-card custom-class='order' centered='true' wx:for='{{orderUsedList}}' wx:for-item='item' wx:key='item' num="{{item.day}}" price="{{item.money}}" desc="{{item.content}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}' />
+      <van-card custom-class='order' centered='true' wx:for='{{orderUsedList}}' wx:for-item='item' wx:key='item' num="{{item.day}}" price="{{item.good.price}}" desc="{{item.good.area}}" title="{{item.good.descKey}}" thumb="{{ item.good.picture[0] }}" bindtap='toInfoUrl' id='{{item.id}}' lazy-load="true"/>
       </view>
       <view wx:else class='noListInfo'>
         -- 暂无 --
@@ -35,7 +35,7 @@
 
     <van-tab title="未使用">
       <view wx:if="{{orderUnusedList.length > 0}}">
-      <van-card custom-class='order' centered='true' wx:for='{{orderUnusedList}}' wx:for-item='item' wx:key='item' num="{{item.day}}" price="{{item.money}}" desc="{{item.content}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}' />
+      <van-card custom-class='order' centered='true' wx:for='{{orderUnusedList}}' wx:for-item='item' wx:key='item' num="{{item.day}}" price="{{item.good.price}}" desc="{{item.good.area}}" title="{{item.good.descKey}}" thumb="{{ item.good.picture[0] }}" bindtap='toInfoUrl' id='{{item.id}}' lazy-load="true" />
       </view>
       <view wx:else class='noListInfo'>
         -- 暂无 --
