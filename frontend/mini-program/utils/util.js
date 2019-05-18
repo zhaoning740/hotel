@@ -1,4 +1,5 @@
 const formatTime = date => {
+  console.log('date', date)
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -6,7 +7,7 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 const formatNumber = n => {
@@ -30,7 +31,21 @@ function formatUnixtime(unixtime) {
   return timeSpanStr;
 }
 
+function string2date(strTime = '2019-03-03') {
+  return new Date(Date.parse(strTime.replace(/-/g, "/"))); 
+}
+
+function getDateString(start = '', during = 0) {
+  if (!start) {
+    return this.formatTime(new Date())
+  }
+  const startDate = +this.string2date(start);
+  return this.formatTime(new Date(startDate + during * 1000 * 60 * 60 * 24))
+}
+
 module.exports = {
   formatTime: formatTime,
   formatUnixtime,
+  string2date,
+  getDateString,
 }
