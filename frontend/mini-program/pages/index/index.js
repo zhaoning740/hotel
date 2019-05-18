@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 const util = require('../../utils/util.js')
+const R = require('../../utils/request.js')
 
 Page({
   data: {
@@ -63,22 +64,7 @@ Page({
         120105: '河北区',
       }
     },
-    proList: [
-      {
-        id: 1,
-        desc: '独立房间·1卧1床1卫',
-        adress: '安德里北街地铁+限女生+吃货天堂+独立公寓',
-        image: '/images/1.jpg',
-        money: 189
-      },
-      {
-        id: 2,
-        desc: '独立公寓·2卧2床1卫',
-        adress: '西局地铁口XX大厦北行560m',
-        image: '/images/6.jpeg',
-        money: 268
-      }
-    ]
+    proList: []
   },
   //事件处理函数
   bindViewTap: function() {
@@ -86,15 +72,13 @@ Page({
       url: '../logs/logs'
     })
   },
-  onSearch: () => {
-    const that = this;
-    wx.request({
-      url: app.globalData.apiUrl + '/good/shopList',
-      data: {},
-      success: (res) => {
-        console.log('onSearch==>', res)
-      }
-    })
+  onSearch: function() {
+    const param = {
+      address: this.data.areaShow !== '选择目的地或城市' ? this.data.areaShow : null,
+      checkintime: this.data.showBeginTime !== '选择起始日期' ? (this.data.showBeginTime + ' 00:00:00') : null,
+      checkouttime: this.data.showEndTime !== '选择结束日期' ? (this.data.showEndTime + ' 23:59:59') : null
+    }
+    this.fetchGoodList(param)
   },
   //选择起始时间
   startTime() {
@@ -160,39 +144,31 @@ Page({
       url,
     })
   },
-  // 允许授权
-  // onGotUserInfo(e){
-  //   app.globalData.showLoginModal = false;
-  //   this.setData({
-  //     showModal: app.globalData.showLoginModal
-  //   })
-  // },
 
   onLoad: function() {
 
   },
   onShow: function() {
-    // 授权
-    // this.setData({
-    //   showModal: app.globalData.showLoginModal
-    // })
-    app.ready().then(() => {
-      this.fetchGoodList()
-    }).catch()
-    // this.fetchGoodList()
+    this.fetchGoodList()
   },
-  fetchGoodList() {
+  /** 请求商品列表 */
+  fetchGoodList(data = {}) {
     var _this = this
-    wx.request({
-      url: app.globalData.apiUrl + '/good/list',
+    R.request({
+      url: '/good/list',
       method: 'post',
+      data: data,
       success: (res) => {
-        if(res.success && Array.isArray(res.data)) {
+        if(Array.isArray(res.data)) {
+          const list = res.data.map(item => ({
+            ...item,
+            picture: (Array.isArray(item.picture) && item.picture.map(i => (app.globalData.apiUrl + app.globalData.imgUrl + i))) || ['/images/1.jpg'],
+          }))
           _this.setData({
-            proList: res.data
+            proList: list
           })
         }
-      },
+      }
     })
   },
 

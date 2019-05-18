@@ -107,3 +107,6 @@ margin-left: 20rpx;
   font-size: 32rpx;
   color: rgb(43, 175, 43);
 }
+.center{
+  text-align: center;
+}
