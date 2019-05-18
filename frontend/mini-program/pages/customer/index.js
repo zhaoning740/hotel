@@ -7,97 +7,15 @@ Page({
    */
   data: {
     userInfo: {},
-    orderList:[
-      {
-        id: 12,
-        num:  1,
-        price: 125,
-        desc: '独立房间·1卧1床1卫',
-        title: '安德里北街地铁+限女生+吃货天堂+独立公寓+独立公寓',
-        imageURL: 'http://www.heyjuice.cn//Public/Wap/images/qxqt_00001.jpg'
-      },
-      {
-        id: 13,
-        num: 2,
-        price: 345,
-        desc: '独立房间·1卧1床1卫',
-        title: '安德里北街地铁+限女生+吃货天堂+独立公寓+独立公寓',
-        imageURL: 'http://www.heyjuice.cn//Public/Wap/images/qxqt_00001.jpg'
-      },
-      {
-        id: 14,
-        num: 3,
-        price: 225,
-        desc: '独立房间·1卧1床1卫',
-        title: '安德里北街地铁+限女生+吃货天堂+独立公寓+独立公寓',
-        imageURL: 'http://www.heyjuice.cn//Public/Wap/images/qxqt_00001.jpg'
-      }
-    ],
-    orderUsedList: [
-      {
-        id: 15,
-        num: 1,
-        price: 125,
-        desc: '独立房间·1卧1床1卫',
-        title: '安德里北街地铁+限女生+吃货天堂+独立公寓+独立公寓',
-        imageURL: 'http://www.heyjuice.cn//Public/Wap/images/qxqt_00001.jpg'
-      },
-      {
-        id: 17,
-        num: 2,
-        price: 345,
-        desc: '独立房间·1卧1床1卫',
-        title: '安德里北街地铁+限女生+吃货天堂+独立公寓+独立公寓',
-        imageURL: 'http://www.heyjuice.cn//Public/Wap/images/qxqt_00001.jpg'
-      },
-      {
-        id: 18,
-        num: 3,
-        price: 225,
-        desc: '独立房间·1卧1床1卫',
-        title: '安德里北街地铁+限女生+吃货天堂+独立公寓+独立公寓',
-        imageURL: 'http://www.heyjuice.cn//Public/Wap/images/qxqt_00001.jpg'
-      }
-    ],
-    orderUnusedList: [
-      {
-        id: 14,
-        num: 1,
-        price: 125,
-        desc: '独立房间·1卧1床1卫',
-        title: '安德里北街地铁+限女生+吃货天堂+独立公寓+独立公寓',
-        imageURL: 'http://www.heyjuice.cn//Public/Wap/images/qxqt_00001.jpg'
-      },
-      {
-        id: 13,
-        num: 2,
-        price: 345,
-        desc: '独立房间·1卧1床1卫',
-        title: '安德里北街地铁+限女生+吃货天堂+独立公寓+独立公寓',
-        imageURL: 'http://www.heyjuice.cn//Public/Wap/images/qxqt_00001.jpg'
-      },
-      {
-        id: 17,
-        num: 3,
-        price: 225,
-        desc: '独立房间·1卧1床1卫',
-        title: '安德里北街地铁+限女生+吃货天堂+独立公寓+独立公寓',
-        imageURL: 'http://www.heyjuice.cn//Public/Wap/images/qxqt_00001.jpg'
-      }
-    ],
+    orderList:[],
+    orderUsedList: [],
+    orderUnusedList: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // app.ready().then(() => {
-    //   if (app.globalData.userInfo) {
-    //     this.setData({
-    //       userInfo: app.globalData.userInfo,
-    //     })
-    //   }
-    // })
   },
 
   /**
@@ -148,6 +66,11 @@ Page({
   onShareAppMessage: function () {
 
   },
+  onTabChange: function (event) {
+    if (event.detail.index === 0 || event.detail.title === '全部订单'){
+      this.fetchOrderList()
+    }
+  },
   fetchOrderList: function (param = {}) {
     const _this = this;
     R.request({
@@ -160,8 +83,12 @@ Page({
       success: (res) => {
         if (Array.isArray(res.data)) {
           const list = res.data;
+          const orderUsedList = list.filter(item => item.state === 1);
+          const orderUnusedList = list.filter(item => item.state === 0);
           _this.setData({
-            orderList: list
+            orderList: list,
+            orderUsedList,
+            orderUnusedList
           })
         }
       }
@@ -171,7 +98,7 @@ Page({
   toInfoUrl(e) {
     console.log(e.target.id)
     const id = e.target.id;
-    const url = '/pages/orderInfo/orderInfo?id=' + id;
+    const url = '/pages/orderInfo/orderInfo?orderId=' + id;
     wx: wx.navigateTo({
       url
     })

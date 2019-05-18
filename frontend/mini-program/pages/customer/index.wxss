@@ -31,3 +31,10 @@
 .order{
   border-top: 8px solid #fff;
 }
+.noListInfo{
+  margin-top: 100rpx;
+  font-size: 28rpx;
+  color: #ccc;
+  margin-bottom: 30rpx;
+  text-align: center;
+}

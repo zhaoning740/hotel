@@ -13,18 +13,33 @@
   </view>
 
   <!-- 订单 -->
-  <van-tabs active="{{ active }}" color='#1ed6c4' bind:change="onChange">
+  <van-tabs active="{{ active }}" color='#1ed6c4' bind:change="onTabChange">
     <van-tab title="全部订单">
-        <van-card custom-class='order' wx:for='{{orderList}}' wx:for-item='item' wx:key='item' centered='true' num="{{item.num}}" price="{{item.price}}" desc="{{item.desc}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}'
+      <view wx:if="{{orderList.length > 0}}">
+        <van-card custom-class='order' wx:for='{{orderList}}' wx:for-item='item' wx:key='item' centered='true' num="{{item.day}}" price="{{item.money}}" desc="{{item.content}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}'
         />
+      </view>
+      <view wx:else class='noListInfo'>
+        -- 暂无 --
+      </view>
     </van-tab>
 
     <van-tab title="已使用">
-      <van-card custom-class='order' centered='true' wx:for='{{orderUsedList}}' wx:for-item='item' wx:key='item' num="{{item.num}}" price="{{item.price}}" desc="{{item.desc}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}' />
+      <view wx:if="{{orderUsedList.length > 0}}">
+      <van-card custom-class='order' centered='true' wx:for='{{orderUsedList}}' wx:for-item='item' wx:key='item' num="{{item.day}}" price="{{item.money}}" desc="{{item.content}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}' />
+      </view>
+      <view wx:else class='noListInfo'>
+        -- 暂无 --
+      </view>
     </van-tab>
 
     <van-tab title="未使用">
-      <van-card custom-class='order' centered='true' wx:for='{{orderUnusedList}}' wx:for-item='item' wx:key='item' num="{{item.num}}" price="{{item.price}}" desc="{{item.desc}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}' />
+      <view wx:if="{{orderUnusedList.length > 0}}">
+      <van-card custom-class='order' centered='true' wx:for='{{orderUnusedList}}' wx:for-item='item' wx:key='item' num="{{item.day}}" price="{{item.money}}" desc="{{item.content}}" title="{{item.title}}" thumb="{{ item.imageURL }}" bindtap='toInfoUrl' id='{{item.id}}' />
+      </view>
+      <view wx:else class='noListInfo'>
+        -- 暂无 --
+      </view>
     </van-tab>
   </van-tabs>
 
