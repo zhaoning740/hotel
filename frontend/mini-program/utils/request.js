@@ -24,7 +24,6 @@ function request(config = defaultConfig) {
     })
   }
   app.ready().then((userInfo) => {
-    console.log('ready done', userInfo)
     wx.request({
       url:  url,
       data: data,
@@ -32,11 +31,18 @@ function request(config = defaultConfig) {
       success: function (res) {
         console.log('req', res)
         if (res.statusCode === 200 && res.data.success) {
-          requestHandler.success(res.data)
+          const resData = {
+            userInfo,
+            ...res.data,
+          }
+          requestHandler.success(resData)
         } else {
           wx.showToast({
             title: '请求出错了！',
             icon: 'none',
+            complete: function () {
+              requestHandler.fail();
+            }
           })
         }
       },
