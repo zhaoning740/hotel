@@ -5,7 +5,7 @@
     <van-cell-group title="">
       <van-cell title="入住时间" is-link value="{{showBeginTime}}" bind:click="onChangeStartTime"/>
       <van-cell title="入住天数">
-        <van-stepper value="{{ 1 }}" bind:change="onDayChange" integer="true" />
+        <van-stepper value="{{ submitInfo.day }}" bind:change="onDayChange" integer="true" />
       </van-cell>
       <van-field
         value="{{ userInfo.phone }}"

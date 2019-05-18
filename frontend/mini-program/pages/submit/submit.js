@@ -30,7 +30,7 @@ Page({
       store: '123456',
       checkintime: util.formatTime(new Date()),
       checkouttime: util.formatTime(new Date()),
-      day: 2,
+      day: 1,
       money: 0.00
     }
   },
@@ -40,7 +40,11 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      id: options.id
+      id: options.id,
+      submitInfo: {
+        ...this.data.submitInfo,
+        goodId: options.id,
+      }
     })
   },
 
@@ -144,10 +148,10 @@ Page({
       submitInfo: {
         ...this.data.submitInfo,
         day: event.detail,
-        checkouttime: util.getDateString(this.data.submitInfo.checkintime, event.detail)
+        checkouttime: util.getDateString(this.data.submitInfo.checkintime, event.detail),
+        money: event.detail * this.data.productInfo.price,
       }
     })
-    console.log('submitInfo', this.data.submitInfo)
   },
   // 支付
   onSubmit: function () {
@@ -167,7 +171,7 @@ Page({
             success(res) {
               if (res.success) {
                 wx.navigateTo({
-                  url: '/pages/success/success'
+                  url: '/pages/success/success?orderId=' + res.data
                 })
               } else {
                 wx.showToast({
