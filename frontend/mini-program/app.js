@@ -117,6 +117,7 @@ App({
     token: null,
     session_key: null,
     userInfo: {},
-    apiUrl: 'http://zh2426.natappfree.cc'
+    apiUrl: 'http://4kddex.natappfree.cc',
+    imgUrl: '/user/image/'
   }
 })
