@@ -1,6 +1,6 @@
 /** 封装下wx.request, 加下loading和app.ready校验 */
 const app = getApp()
-const requestHandler = {
+const defaultConfig = {
   url: '',
   data: {},
   method: 'get',
@@ -13,7 +13,8 @@ const requestHandler = {
   loading: true
 }
 
-function request(requestHandler) {
+function request(config = defaultConfig) {
+  const requestHandler = { ...defaultConfig, ...config };
   const data = requestHandler.data;
   const url = app.globalData.apiUrl + requestHandler.url;
   const method = requestHandler.method;
@@ -32,6 +33,11 @@ function request(requestHandler) {
         console.log('req', res)
         if (res.statusCode === 200 && res.data.success) {
           requestHandler.success(res.data)
+        } else {
+          wx.showToast({
+            title: '请求出错了！',
+            icon: 'none',
+          })
         }
       },
       fail: function () {
