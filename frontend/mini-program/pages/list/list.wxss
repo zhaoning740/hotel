@@ -32,3 +32,10 @@ margin-left: 20rpx;
   margin-top: 20rpx;
   margin-bottom: 30rpx;
 }
+.noListInfo{
+  margin-top: 100rpx;
+  font-size: 28rpx;
+  color: #ccc;
+  margin-bottom: 30rpx;
+  text-align: center;
+}

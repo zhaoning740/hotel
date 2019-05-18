@@ -8,7 +8,7 @@
         <view class='ist_box_money'>¥ {{item.price}} 每晚</view>
       </view>
     </view>
-    <view wx:else="{{proList.length == 0}}" class='timeddesc center'>
+    <view wx:else="{{proList.length == 0}}" class='noListInfo'>
      -- 暂无数据 --
     </view>
 
