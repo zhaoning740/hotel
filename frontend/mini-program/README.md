@@ -4,4 +4,6 @@
 
 ## 预览
 
-![小程序启动页](../asset/mini-program-index.png)
+<img src='../asset/mini-program-index.png' style="width: 260px"/>
+
+<!-- ![小程序启动页](../asset/mini-program-index.png) -->
