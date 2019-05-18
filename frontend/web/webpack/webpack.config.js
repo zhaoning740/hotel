@@ -1,3 +1,4 @@
+const URI = require('../src/base/uri');
 const path = require('path');
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -22,7 +23,7 @@ module.exports = {
     proxy: {
       "/": {
         name:"API",  // 自己取名
-        target: "http://y7v2pw.natappfree.cc",
+        target: URI.baseUri,
         changeOrigin: true,
         secure: false
       },

@@ -100,11 +100,12 @@
 <script>
 import R from "@/request";
 import FormatDate from "@/date";
-
+// import URI from '../../../base/uri';
+const URI = require('../../../base/uri');
 export default {
   data() {
     return {
-      imgUrl: 'http://y7v2pw.natappfree.cc/user/image/',
+      imgUrl: URI.baseUri + URI.imgUri,
       areaList: [
           {
             value: "北京",
@@ -334,6 +335,7 @@ export default {
     },
     handleRemove(file) {
       const fileList = this.$refs.upload.fileList;
+      console.log('remove', fileList, file);
       this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
     },
     handleSuccess(res, file) {

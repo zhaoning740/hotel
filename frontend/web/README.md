@@ -18,6 +18,10 @@ npm run serve
 
 修改代理去 `webpack/webpack.config.js`
 
+## 注意事项
+
+- 改请求地址在 `src/base/uri.js`
+
 ## 线上打包
 
 ```bash
