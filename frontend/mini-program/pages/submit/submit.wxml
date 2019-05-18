@@ -1,7 +1,7 @@
 <!--pages/submit/submit.wxml-->
 <van-panel title="{{productInfo.area}}·{{productInfo.goodType}}" desc="{{productInfo.describet}}" status="¥{{productInfo.price}}" use-footer-slot>
   <view>
-    <text>入住信息确认</text>
+    <view class='title'>入住信息确认</view>
     <van-cell-group title="">
       <van-cell title="入住时间" is-link value="{{showBeginTime}}" bind:click="onChangeStartTime"/>
       <van-cell title="入住天数">
@@ -11,7 +11,7 @@
         value="{{ userInfo.phone }}"
         label="联系电话"
         placeholder="请输入电话号码"
-        bind:change="onChange"
+        bind:change="onPhoneChange"
         is-link
       />
       <van-field

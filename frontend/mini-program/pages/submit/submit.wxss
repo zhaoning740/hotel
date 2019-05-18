@@ -1,1 +1,6 @@
 /* pages/submit/submit.wxss */
+.title{
+  padding: 20rpx;
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
+}

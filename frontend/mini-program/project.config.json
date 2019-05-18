@@ -93,10 +93,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 8,
 					"name": "订单确认",
 					"pathName": "pages/submit/submit",
-					"query": "id=3"
+					"query": "id=4"
 				}
 			]
 		}

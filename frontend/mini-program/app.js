@@ -118,7 +118,7 @@ App({
     showLoginModal: false,
     searchParam: {},
     userInfo: {},
-    apiUrl: 'http://mxnpv5.natappfree.cc',
+    apiUrl: 'http://w25v6r.natappfree.cc',
     imgUrl: '/user/image/'
   }
 })

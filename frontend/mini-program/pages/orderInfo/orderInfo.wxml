@@ -2,16 +2,16 @@
   <view class="orderInfo-list">
     <view class='orderInfo-header'>
       <view class='orderInfo-ordercode'>订单号：{{orderInfo.id}}</view>
-      <view class='orderInfo-status'>{{orderInfo.createtime}}</view>
+      <view class='orderInfo-status'>提交时间: {{orderInfo.createtime}}</view>
     </view>
     
   </view>
   <view class='orderinfo-user'>
     <view class='orderinfo-user-item'>联系人：{{orderInfo.account}}</view>
-    <view class='orderinfo-user-item'>联系方式：{{orderInfo.receiver_phone}}</view>
+    <view class='orderinfo-user-item'>联系方式：{{orderInfo.phone}}</view>
     <view class='orderinfo-user-item'>入住时间：{{orderInfo.checkintime}}</view>
     <view class='orderinfo-user-item'>结束时间：{{orderInfo.checkouttime}}</view>
-    <view class='orderinfo-user-item'>地址：{{orderInfo.address}}</view>   
+    <view class='orderinfo-user-item'>地址：{{orderInfo.address}}</view>
     <view class='orderinfo-user-item'>总价: ¥{{orderInfo.money}}</view>   
     <view class='orderinfo-user-item'>订单状态：{{orderInfo.state}}</view>
     

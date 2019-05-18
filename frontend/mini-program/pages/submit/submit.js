@@ -27,6 +27,7 @@ Page({
     },
     submitInfo: {
       account: app.globalData.id,
+      phone: '',
       store: '123456',
       checkintime: util.formatTime(new Date()),
       checkouttime: util.formatTime(new Date()),
@@ -150,6 +151,14 @@ Page({
         day: event.detail,
         checkouttime: util.getDateString(this.data.submitInfo.checkintime, event.detail),
         money: event.detail * this.data.productInfo.price,
+      }
+    })
+  },
+  onPhoneChange: function(event) {
+    this.setData({
+      submitInfo: {
+        ...this.data.submitInfo,
+        phone: event.detail
       }
     })
   },
