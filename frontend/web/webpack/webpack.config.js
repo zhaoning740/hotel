@@ -20,6 +20,7 @@ module.exports = {
     hot: true,
     port: 3000,
     contentBase: path.resolve(process.cwd(), 'dist'),
+    quiet: true, // necessary for FriendlyErrorsPlugin
     proxy: {
       "/": {
         name:"API",  // 自己取名
