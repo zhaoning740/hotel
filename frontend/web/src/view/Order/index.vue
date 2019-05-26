@@ -47,7 +47,14 @@ export default {
         },
         {
           title: "订单状态",
-          key: "status"
+          key: "status",
+          render: (h, params) => {
+            if(params.row.state === 0) {
+              return h('span', '未使用');
+            } else {
+              return h('span', '已使用');
+            }       
+          }
         },
         {
           title: "支付金额(￥)",
